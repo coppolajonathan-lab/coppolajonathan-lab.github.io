@@ -47,6 +47,8 @@
   .cover { aspect-ratio: 4 / 3; background: var(--stage, var(--ink)); position: relative; overflow: hidden; }
   .cover img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
   .card:hover .cover img { transform: scale(1.03); }
+  .cover.poster img { object-fit: contain; }
+  .card:hover .cover.poster img { transform: none; }
   .cover.placeholder { display: grid; place-items: center; background:
       radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--gold) 35%, transparent), transparent 55%), var(--stage, var(--ink)); }
   .cover.placeholder span { font-family: var(--serif); font-style: italic; color: #f3ead7; font-size: 28px; text-align: center; padding: 0 20px; line-height: 1.15; }
@@ -164,13 +166,16 @@ fetch('content.json', { cache: 'no-store' }).then(r => r.json()).then(d => {
     <div class="org">${esc(w.org)}</div><p>${esc(w.description)}</p></div></div>`).join('');
 
   const today = new Date(); today.setHours(0, 0, 0, 0);
+  d.upcoming_shows.forEach(s => { s.poster = s.poster || s.cover; s.dates_text = s.dates_text || s.dates; });
+  d.past_shows.forEach(s => { s.cover = s.cover || s.poster; });
+  d.campaigns.forEach(c => { c.cover = c.cover || c.poster; });
   const up = d.upcoming_shows.filter(s => !s.end || new Date(s.end + 'T23:59:59') >= today)
     .sort((a, b) => (a.start || '').localeCompare(b.start || ''));
   $('upCount').textContent = up.length ? `${up.length} on the calendar` : '';
   $('upcomingList').innerHTML = up.length ? `<div class="grid">${up.map(s => `<article class="card">
-      ${cover({ cover: s.poster }, s.show, s.company)}
+      ${cover({ cover: s.poster }, s.show, s.company).replace('class="cover"', 'class="cover poster"')}
       <div class="body"><span class="pill gold">${esc(s.dates_text || (s.start ? fmt(s.start) : 'Dates TBA'))}</span>
-      <h3>${esc(s.show)}</h3><div class="meta">${esc(s.role)} · ${esc(s.company)}${s.venue ? ' · ' + esc(s.venue) : ''}</div>
+      <h3>${esc(s.show)}</h3><div class="meta">${esc(s.role)} · ${esc(s.company)}${s.director ? ' · dir. ' + esc(s.director) : ''}${s.venue ? ' · ' + esc(s.venue) : ''}</div>
       ${s.blurb ? `<p>${esc(s.blurb)}</p>` : ''}
       ${s.tickets_url ? `<a class="more" href="${esc(s.tickets_url)}" target="_blank" rel="noopener">Get tickets →</a>` : ''}</div></article>`).join('')}</div>`
     : `<div class="empty">${esc(d.upcoming_empty_note)}</div>`;

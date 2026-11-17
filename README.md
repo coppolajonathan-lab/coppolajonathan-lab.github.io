@@ -24,7 +24,7 @@ Upload them to `now/images/shows/<show>/` or `now/images/campaigns/<campaign>/`,
 "cover": "images/shows/come-from-away-2026/cover.jpg",
 "photos": [{ "src": "images/shows/come-from-away-2026/01-bows.jpg", "caption": "Closing night bows" }]
 ```
-Paths in `content.json` are relative to `now/`. Resize photos to about 1600–2000 px on the long edge before uploading. Paths are case-sensitive.
+Paths in `content.json` are relative to `now/` and must match the file name exactly (capitals and `.jpg` vs `.jpeg` count). Upcoming shows accept `cover` or `poster`, and `dates` or `dates_text`. Add `"start"`/`"end"` as `YYYY-MM-DD` so a show drops off Upcoming after it closes. Resize photos to about 1600–2000 px on the long edge before uploading. Paths are case-sensitive.
 
 Run locally: `python3 -m http.server 8000`, then open http://localhost:8000
 

@@ -29,7 +29,7 @@ jobs:
           python3 - <<'PY'
           import json, os
           d = json.load(open('now/content.json'))
-          paths = [s.get('poster') for s in d['upcoming_shows']]
+          paths = [s.get('poster') or s.get('cover') for s in d['upcoming_shows']]
           for group in ('past_shows', 'campaigns'):
               for item in d[group]:
                   paths.append(item.get('cover'))

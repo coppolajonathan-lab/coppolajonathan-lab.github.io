@@ -5,7 +5,7 @@
 <script>try{var t=localStorage.getItem('site-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Brandon 3/2 Watch</title>
-<link rel="stylesheet" href="../../assets/apps.css">
+<link rel="stylesheet" href="../../assets/apps.css?v=202611171543">
 <style>
   :root { --accent: #9a6b1f; --accent-ink: #ffffff; }
   html[data-theme="leather"] { --accent: #e0b062; --accent-ink: #1a120c; }
@@ -22,7 +22,7 @@
   .barcmp .b { height: 18px; border-radius: 6px; background: var(--accent); }
   .barcmp .b.rent { background: #4a78a8; }
 </style>
-<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/site.css?v=202611171543">
 </head>
 <body data-root="../../" data-section="apps">
 <div class="wrap">
@@ -112,6 +112,6 @@ fetch('data.json', { cache: 'no-store' }).then(r => r.json()).then(d => {
   ['price', 'down', 'rate', 'term'].forEach(id => $(id).addEventListener('input', render));
 }).catch(() => { $('verdict').textContent = 'Could not load data.json.'; });
 </script>
-<script src="../../assets/site.js"></script>
+<script src="../../assets/site.js?v=202611171543"></script>
 </body>
 </html>

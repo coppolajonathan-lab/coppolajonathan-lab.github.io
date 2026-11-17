@@ -27,3 +27,7 @@ Upload them to `now/images/shows/<show>/` or `now/images/campaigns/<campaign>/`,
 Paths in `content.json` are relative to `now/`. Resize photos to about 1600–2000 px on the long edge before uploading. Paths are case-sensitive.
 
 Run locally: `python3 -m http.server 8000`, then open http://localhost:8000
+
+## Cache-busting
+GitHub Pages caches files for about 10 minutes. After editing anything in `assets/`, bump the `?v=` number on the `assets/...` links in every `index.html` so visitors get the new version right away:
+`grep -rl --include=index.html "assets/" . | xargs sed -i -E "s#\?v=[0-9]+#?v=$(date +%Y%m%d%H%M)#g"`

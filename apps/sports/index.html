@@ -5,7 +5,7 @@
 <script>try{var t=localStorage.getItem('site-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Scoreboard · Jonathan's Teams</title>
-<link rel="stylesheet" href="../../assets/apps.css">
+<link rel="stylesheet" href="../../assets/apps.css?v=202611171543">
 <style>
   :root { --accent: #2f6f68; --accent-ink: #ffffff; }
   html[data-theme="leather"] { --accent: #6cc3b6; --accent-ink: #1a120c; }
@@ -32,7 +32,7 @@
   .standings tr.cut td { border-bottom: 2px dashed var(--muted); }
   .next { font-size: 13px; color: var(--muted); margin-top: 10px; }
 </style>
-<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/site.css?v=202611171543">
 </head>
 <body data-root="../../" data-section="apps">
 <div class="wrap">
@@ -75,6 +75,6 @@ fetch('data.json', { cache: 'no-store' }).then(r => r.json()).then(d => {
   document.getElementById('sources').innerHTML = d.sources.map(s => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></li>`).join('');
 }).catch(() => { document.getElementById('teams').innerHTML = '<div class="card empty">Could not load data.json.</div>'; });
 </script>
-<script src="../../assets/site.js"></script>
+<script src="../../assets/site.js?v=202611171543"></script>
 </body>
 </html>

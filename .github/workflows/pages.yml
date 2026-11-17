@@ -1,0 +1,50 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate data files
+        run: for f in now/content.json data/profile.json apps/*/data.json; do python3 -c "import json,sys; json.load(open(sys.argv[1]))" "$f" && echo "ok $f"; done
+      - name: Warn about photo paths that don't exist
+        run: |
+          python3 - <<'PY'
+          import json, os
+          d = json.load(open('now/content.json'))
+          paths = [s.get('poster') for s in d['upcoming_shows']]
+          for group in ('past_shows', 'campaigns'):
+              for item in d[group]:
+                  paths.append(item.get('cover'))
+                  paths += [p['src'] for p in item.get('photos', [])]
+          missing = [p for p in paths if p and not p.startswith('http') and not os.path.exists(os.path.join('now', p))]
+          for p in missing: print(f"::warning::Missing image: {p}")
+          PY
+      - name: Shrink oversized photos for the web (repo originals are untouched)
+        run: |
+          command -v mogrify >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick)
+          find now/images -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) -size +400k -print0 \
+            | xargs -0 -r mogrify -auto-orient -resize '1800x1800>' -quality 82 -strip
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4

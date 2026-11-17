@@ -1,0 +1,192 @@
+{
+  "updated": "2026-11-17T14:30:00-05:00",
+  "teams": [
+    {
+      "id": "usf",
+      "name": "USF Bulls",
+      "sport": "College football",
+      "league": "FBS · American Conference",
+      "color": "#006747",
+      "record": "6–4 (2–4 American)",
+      "last_game": { "date": "2026-11-12", "opponent": "Memphis", "home": true, "score_for": 41, "score_against": 52, "result": "L", "competition": "American Conference" },
+      "recent": [
+        { "date": "2026-11-06", "opponent": "@ East Carolina", "result": "L", "score": "17–20" },
+        { "date": "2026-10-31", "opponent": "UAB", "result": "W", "score": "30–10" },
+        { "date": "2026-10-17", "opponent": "Kent State", "result": "W", "score": "29–2" },
+        { "date": "2026-10-08", "opponent": "@ UTSA", "result": "L", "score": "24–31" }
+      ],
+      "next_game": { "date": "2026-11-21", "opponent": "@ Florida Atlantic", "time": "2:30 PM ET" },
+      "standings": {
+        "title": "Position",
+        "summary": "2–4 in conference play; top two in the American standings make the title game.",
+        "table": null
+      },
+      "playoffs": {
+        "label": "College Football Playoff",
+        "probability": 0,
+        "secondary": { "label": "Bowl eligible", "value": "Yes — 6 wins clinched" },
+        "explanation": "Four losses and a 2–4 conference record take USF out of the American title race and the CFP picture. They're already bowl-eligible."
+      }
+    },
+    {
+      "id": "munster",
+      "name": "Munster Rugby",
+      "sport": "Rugby union",
+      "league": "United Rugby Championship 2026–27",
+      "color": "#c8102e",
+      "record": "W1 D1 L3 · 10 pts",
+      "last_game": { "date": "2026-10-24", "opponent": "Leinster", "home": false, "score_for": 18, "score_against": 24, "result": "L", "competition": "URC (Aviva Stadium)" },
+      "recent": [
+        { "date": "2026-10-17", "opponent": "Racing 92", "result": "W", "score": "33–25", "competition": "Champions Cup" },
+        { "date": "2026-10-10", "opponent": "@ Ulster", "result": "D", "score": "26–26" },
+        { "date": "2026-10-03", "opponent": "Bulls", "result": "W", "score": "26–22" },
+        { "date": "2026-09-26", "opponent": "Glasgow Warriors", "result": "L", "score": "20–26" }
+      ],
+      "next_game": { "date": null, "opponent": "URC resumes after the autumn international window", "time": "" },
+      "standings": {
+        "title": "URC table (top 8 reach the quarter-finals)",
+        "summary": "11th of 16, 4 points off 8th place.",
+        "cut_line": 8,
+        "columns": ["Pos", "Team", "P", "W", "D", "L", "PD", "Pts"],
+        "table": [
+          [1, "Glasgow Warriors", 5, 4, 1, 0, 36, 23],
+          [2, "Stormers", 5, 4, 0, 1, 65, 21],
+          [3, "Bulls", 5, 4, 0, 1, 108, 21],
+          [4, "Edinburgh", 5, 4, 0, 1, 28, 19],
+          [5, "Sharks", 5, 4, 0, 1, 33, 19],
+          [6, "Leinster", 5, 3, 0, 2, 68, 18],
+          [7, "Cardiff", 5, 3, 0, 2, 6, 14],
+          [8, "Dragons", 5, 2, 1, 2, 9, 14],
+          [9, "Ospreys", 5, 2, 0, 3, -35, 11],
+          [10, "Benetton", 5, 1, 1, 3, 11, 11],
+          [11, "Munster", 5, 1, 1, 3, -20, 10],
+          [12, "Connacht", 5, 2, 0, 3, -52, 10],
+          [13, "Scarlets", 5, 1, 0, 4, -57, 9],
+          [14, "Lions", 5, 2, 0, 3, -55, 9],
+          [15, "Ulster", 5, 0, 2, 3, -39, 9],
+          [16, "Zebre", 5, 0, 0, 5, -106, 2]
+        ],
+        "highlight": "Munster",
+        "order_note": "Order by points; ties broken by wins then points difference as best available from ESPN's table."
+      },
+      "playoffs": {
+        "label": "URC quarter-finals (top 8)",
+        "probability": 35,
+        "explanation": "Claude's estimate. Thirteen rounds remain and they're 4 points off 8th, but they've won only once in five league games so far."
+      }
+    },
+    {
+      "id": "leicester",
+      "name": "Leicester Tigers",
+      "sport": "Rugby union",
+      "league": "Gallagher PREM 2026–27",
+      "color": "#00553f",
+      "record": "W4 L1 · 21 pts",
+      "last_game": { "date": "2026-10-30", "opponent": "Bristol Bears", "home": false, "score_for": 22, "score_against": 16, "result": "W", "competition": "PREM (Ashton Gate)" },
+      "recent": [
+        { "date": "2026-10-24", "opponent": "Northampton Saints", "result": "W", "score": "28–7" },
+        { "date": "2026-10-18", "opponent": "@ Pau", "result": "L", "score": "17–41", "competition": "Champions Cup" },
+        { "date": "2026-10-09", "opponent": "Gloucester", "result": "W", "score": "38–31" },
+        { "date": "2026-10-03", "opponent": "@ Newcastle", "result": "W", "score": "24–19" }
+      ],
+      "next_game": { "date": null, "opponent": "PREM resumes after the autumn international window", "time": "" },
+      "standings": {
+        "title": "PREM table (top 4 reach the semi-finals)",
+        "summary": "1st, 5 points clear.",
+        "cut_line": 4,
+        "columns": ["Pos", "Team", "P", "W", "D", "L", "PD", "Pts"],
+        "table": [
+          [1, "Leicester Tigers", 5, 4, 0, 1, 37, 21],
+          [2, "Gloucester", 5, 3, 0, 2, 66, 16],
+          [3, "Northampton Saints", 5, 3, 0, 2, 34, 16],
+          [4, "Saracens", 5, 3, 0, 2, 11, 16],
+          [5, "Bath", 5, 3, 0, 2, -11, 16],
+          [6, "Bristol Bears", 5, 3, 0, 2, 9, 15],
+          [7, "Harlequins", 5, 2, 0, 3, -47, 12],
+          [8, "Sale Sharks", 5, 2, 0, 3, -24, 10],
+          [9, "Exeter Chiefs", 5, 1, 0, 4, -37, 10],
+          [10, "Newcastle", 5, 1, 0, 4, -38, 9]
+        ],
+        "highlight": "Leicester Tigers"
+      },
+      "playoffs": {
+        "label": "PREM semi-finals (top 4)",
+        "probability": 70,
+        "explanation": "Claude's estimate. They're top of the table after five rounds with a 5-point cushion, but there's a long way to go."
+      }
+    },
+    {
+      "id": "bucs",
+      "name": "Tampa Bay Buccaneers",
+      "sport": "NFL",
+      "league": "NFC South",
+      "color": "#d50a0a",
+      "record": "3–6",
+      "last_game": { "date": "2026-11-08", "opponent": "Chicago Bears", "home": false, "score_for": 24, "score_against": 27, "result": "L", "competition": "Sunday Night Football" },
+      "recent": [
+        { "date": "2026-11-01", "opponent": "Atlanta Falcons", "result": "W", "score": "16–0" },
+        { "date": "2026-10-25", "opponent": "@ Carolina Panthers", "result": "W", "score": "43–13" },
+        { "date": "2026-10-18", "opponent": "Pittsburgh Steelers", "result": "L", "score": "19–26" },
+        { "date": "2026-10-08", "opponent": "@ Dallas Cowboys", "result": "W", "score": "24–16" }
+      ],
+      "next_game": { "date": "2026-11-22", "opponent": "@ Detroit Lions", "time": "1:00 PM ET" },
+      "standings": {
+        "title": "NFC South",
+        "summary": "2nd in the division, 12th in the NFC. One game behind Carolina.",
+        "columns": ["Team", "W", "L", "Pct", "NFC rank"],
+        "table": [
+          ["Carolina Panthers", 4, 5, ".444", 4],
+          ["Tampa Bay Buccaneers", 3, 6, ".333", 12],
+          ["New Orleans Saints", 3, 6, ".333", 13],
+          ["Atlanta Falcons", 3, 7, ".300", 14]
+        ],
+        "highlight": "Tampa Bay Buccaneers"
+      },
+      "playoffs": {
+        "label": "Make playoffs",
+        "probability": 20,
+        "explanation": "Claude's estimate. The wild card is a long shot, but the NFC South leader is only 4–5, so winning the division is still realistic."
+      }
+    },
+    {
+      "id": "pats",
+      "name": "New England Patriots",
+      "sport": "NFL",
+      "league": "AFC East",
+      "color": "#2f5d9a",
+      "record": "5–5",
+      "last_game": { "date": "2026-11-15", "opponent": "Detroit Lions", "home": false, "score_for": 10, "score_against": 35, "result": "L", "competition": "Munich, Germany" },
+      "recent": [
+        { "date": "2026-11-08", "opponent": "Green Bay Packers", "result": "L", "score": "27–45" },
+        { "date": "2026-11-01", "opponent": "@ Miami Dolphins", "result": "W", "score": "24–19" },
+        { "date": "2026-10-22", "opponent": "@ Chicago Bears", "result": "L", "score": "24–30" },
+        { "date": "2026-10-18", "opponent": "New York Jets", "result": "W", "score": "26–19" }
+      ],
+      "next_game": { "date": "2026-11-29", "opponent": "@ Los Angeles Chargers", "time": "4:05 PM ET" },
+      "standings": {
+        "title": "AFC East",
+        "summary": "2nd in the division, 8th in the AFC: first team out of the 7 playoff spots.",
+        "columns": ["Team", "W", "L", "Pct", "AFC rank"],
+        "table": [
+          ["Buffalo Bills", 8, 1, ".889", 1],
+          ["New England Patriots", 5, 5, ".500", 8],
+          ["New York Jets", 2, 8, ".200", 13],
+          ["Miami Dolphins", 1, 8, ".111", 15]
+        ],
+        "highlight": "New England Patriots"
+      },
+      "playoffs": {
+        "label": "Make playoffs",
+        "probability": 30,
+        "explanation": "Claude's estimate. They're on the bubble at 8th, coming off two straight losses. Games against the Chargers, Jets and Dolphins are winnable; Buffalo, Kansas City, Minnesota and Denver are not easy."
+      }
+    }
+  ],
+  "sources": [
+    { "title": "Sportradar via Claude sports data (NFL & NCAAFB scores, NFL standings)", "url": "https://www.sportradar.com/" },
+    { "title": "ESPN — URC table 2026–27", "url": "https://africa.espn.com/rugby/table/_/league/270557" },
+    { "title": "ESPN — Gallagher PREM table 2026–27", "url": "https://www.espn.com.br/rugby/classificacao/_/liga/267979" },
+    { "title": "ESPN — Munster results", "url": "https://africa.espn.com/rugby/results/_/team/25925" },
+    { "title": "ESPN — Leicester Tigers results", "url": "https://africa.espn.com/rugby/results/_/team/25903" }
+  ]
+}

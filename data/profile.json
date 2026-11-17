@@ -1,0 +1,235 @@
+{
+  "name": "Jonathan Coppola",
+  "credential": "MS",
+  "headline": "Technical curriculum developer · Program manager · Baritenor · Game master",
+  "location": "Tampa, FL",
+  "email": "coppolajonathan@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/jcoppola1",
+  "github": "https://github.com/coppolajonathan-lab",
+  "intro": "I turn complex security and product concepts into practical learning. By day I build hands-on labs and courses for Darktrace's AI-driven cyber defense platform. By night I'm onstage in Tampa Bay community theater, or behind a GM screen running a campaign for my friends. What ties it together is telling a story so the people in the room want to lean in.",
+  "stats": [
+    {
+      "value": "6+",
+      "label": "years at Darktrace"
+    },
+    {
+      "value": "83",
+      "label": "Net Promoter Score"
+    },
+    {
+      "value": "1000s",
+      "label": "learners trained"
+    },
+    {
+      "value": "24",
+      "label": "ILT manuals → e-learning"
+    }
+  ],
+  "summary": "Technical curriculum developer with a software engineering background and 6+ years at Darktrace building hands-on labs, e-learning courses and training for its AI-driven cyber defense platform. Experienced in C#, SQL, REST API development and database engineering, with a Master's in Cybersecurity. I turn complex security and product concepts into practical learning for technical audiences, sustaining an 83 NPS across thousands of learners.",
+  "experience": [
+    {
+      "company": "Darktrace",
+      "location": "Remote / Tampa, FL",
+      "roles": [
+        {
+          "title": "Program Manager, Enablement of Technical Product Content",
+          "dates": "Sep 2026 – Present",
+          "bullets": [
+            "Lead the conversion of 24 instructor-led training (ILT) manuals into hands-on e-learning labs and courses across 7 Darktrace product lines, coordinating product, engineering and education teams",
+            "Own planning, prioritization and delivery timelines for enablement releases aligned to product launches"
+          ]
+        },
+        {
+          "title": "Cyber Defense Educator / Curriculum Developer",
+          "dates": "Jul 2020 – Present",
+          "bullets": [
+            "Deliver technical training on Darktrace's AI-driven cyber defense platform to customers, partners and internal analysts, covering threat detection, investigation and response workflows",
+            "Develop and maintain curriculum, labs and learning materials, keeping content current with frequent product releases",
+            "Trained thousands of learners across 13 courses, sustaining an 83 Net Promoter Score over 6 years",
+            "Helped build Darktrace's Email product training course from the ground up"
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Electronic Data, Inc. (EDI)",
+      "location": "Tampa, FL",
+      "roles": [
+        {
+          "title": "Data Developer",
+          "dates": "May 2019 – Apr 2020",
+          "bullets": [
+            "Built and maintained databases and data processes supporting client operations using Visual Basic and Microsoft Access",
+            "Created and maintained internal and external KPI reports used by leadership to track performance",
+            "Built a Microsoft Access and Visual Basic data bridge to migrate client companies' legacy asset-management data into IBM Maximo"
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Pronto Progress",
+      "location": "Tampa, FL",
+      "roles": [
+        {
+          "title": "Software Engineer",
+          "dates": "Jun 2018 – Mar 2019",
+          "bullets": [
+            "Developed a C# REST API wrapper around a client's Silverlight-based quality control system, extending its life without rebuilding the database interface and enabling multi-browser support",
+            "Built a Kendo HTML5 / MVC Razor and JavaScript user interface that mirrored the legacy design, keeping user retraining minimal at launch",
+            "Applied Agile methods and Secure SDLC practices in testing to ensure application security"
+          ]
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "group": "Technical",
+      "items": [
+        "C#",
+        "SQL",
+        "PHP",
+        "HTML5 / JavaScript",
+        "REST API design",
+        "Kendo UI / MVC Razor",
+        "Windows Server",
+        "Database design",
+        "Advanced Excel",
+        "Claude & LLMs"
+      ]
+    },
+    {
+      "group": "Program & Project Management",
+      "items": [
+        "Roadmap planning",
+        "Stakeholder alignment",
+        "Agile delivery",
+        "KPI tracking & reporting"
+      ]
+    },
+    {
+      "group": "Technical Enablement",
+      "items": [
+        "Hands-on labs",
+        "E-learning (Reprise)",
+        "Curriculum design",
+        "Instructor-led & virtual training",
+        "Product documentation",
+        "Public speaking"
+      ]
+    },
+    {
+      "group": "Cybersecurity",
+      "items": [
+        "Threat detection & response",
+        "Network security & analysis",
+        "Phishing & social engineering risk",
+        "Secure SDLC"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Science, Cybersecurity",
+      "school": "University of Tampa",
+      "year": "2019",
+      "notes": "GPA 3.5 · Cybersecurity Club"
+    },
+    {
+      "degree": "Bachelor of Science, Management Information Systems",
+      "school": "University of South Florida",
+      "year": "2017",
+      "notes": "Honors College · Lead organizer, 5th Annual Chinese Culture Festival (2015)"
+    }
+  ],
+  "publications": [
+    {
+      "title": "Suspicion in Phishing and Organizational Risk",
+      "venue": "Southern Association of Information Systems",
+      "date": "Mar 1, 2019",
+      "authors": "Jonathan Coppola and Deanna House",
+      "summary": "Research and literary analysis of suspicion as an emotion as it relates to phishing scams and the risk they pose to organizations."
+    }
+  ],
+  "stage": {
+    "voice": "Baritenor",
+    "blurb": "I grew up in choir and marching band, and found my way back to the stage as an adult through Tampa Bay community theater. I love ensemble storytelling, accents, and the moment a whole cast lands a harmony.",
+    "credits": [
+      {
+        "show": "Come From Away",
+        "role": "Oz / Ensemble",
+        "company": "New Tampa Players",
+        "director": "Nora Paine",
+        "year": "2026"
+      }
+    ],
+    "training": [
+      {
+        "what": "Choir",
+        "detail": "Ensemble vocal performance"
+      },
+      {
+        "what": "Marching band",
+        "detail": "Instrumental ensemble performance (baritone horn, percussion)"
+      }
+    ],
+    "dialects": [
+      "British (RP)",
+      "Newfoundland",
+      "Southern US",
+      "Spanish",
+      "French",
+      "Russian"
+    ],
+    "instruments": [
+      "Baritone horn",
+      "Percussion"
+    ],
+    "stats": {
+      "Height": "5'5\"",
+      "Hair": "Strawberry blonde",
+      "Eyes": "Blue"
+    }
+  },
+  "tabletop": {
+    "blurb": "I'm a game master at heart. I build worlds around situations rather than railroads, give players real choices, and always leave a hook dangling at the end of the night.",
+    "campaigns": [
+      {
+        "name": "Chronicles of the Twin Souls",
+        "system": "Dungeons & Dragons 5e",
+        "role": "Dungeon Master",
+        "pitch": "An urban intrigue campaign in the city of Waterdeep: nightlife, politics, and something supernatural moving under the surface."
+      },
+      {
+        "name": "Dungeon Crawler Carl RPG",
+        "system": "Renegade Game Studios",
+        "role": "Game Master",
+        "pitch": "A brand-new crawl. The dungeon is a game show, the clock is always ticking, and the System AI is watching."
+      }
+    ],
+    "tools": [
+      {
+        "label": "Campaign Forge",
+        "url": "apps/campaign-forge/",
+        "note": "the campaign-idea chatbot I built"
+      }
+    ]
+  },
+  "also": [
+    {
+      "label": "Jonathan's Apothecary of Scents",
+      "url": "https://jonathans-apothecary-of-scents.scentsy.us",
+      "note": "a fantasy- and TTRPG-themed Scentsy shop: \"Brewing Comfort, One Fragrance At a Time\""
+    },
+    {
+      "label": "What I'm up to",
+      "url": "now/",
+      "note": "shows, photos and current campaigns"
+    },
+    {
+      "label": "Apps",
+      "url": "apps/",
+      "note": "small tools I've built"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scoreboard · Jonathan's Teams</title>
+<link rel="stylesheet" href="../../assets/apps.css">
+<style>
+  :root { --accent: #2f6f68; --accent-ink: #ffffff; }
+  .team { border-top: 4px solid var(--tc); }
+  .team header { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+  .team h3 { font-family: var(--display); font-size: 22px; margin: 0; }
+  .team .league { color: var(--muted); font-size: 13px; }
+  .record { font-family: var(--mono); font-size: 13px; color: var(--muted); text-align: right; }
+  .score { display: flex; align-items: center; gap: 14px; margin: 16px 0 6px; }
+  .score .res { font-family: var(--display); font-weight: 800; font-size: 34px; width: 46px; text-align: center; border-radius: 10px; }
+  .res.W { color: var(--good); } .res.L { color: var(--bad); } .res.D { color: var(--warn); }
+  .score .nums { font-family: var(--mono); font-size: 26px; font-weight: 600; }
+  .score .vs { font-size: 14px; color: var(--muted); }
+  .form { display: flex; gap: 6px; margin: 8px 0 14px; flex-wrap: wrap; }
+  .form span { font-family: var(--mono); font-size: 12px; padding: 2px 7px; border-radius: 6px; border: 1px solid var(--line); }
+  .form .W { color: var(--good); } .form .L { color: var(--bad); } .form .D { color: var(--warn); }
+  .odds { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; align-items: center; margin-top: 14px; }
+  .bar { height: 10px; background: var(--panel-2); border-radius: 999px; overflow: hidden; border: 1px solid var(--line); }
+  .bar i { display: block; height: 100%; background: var(--tc); filter: brightness(1.35) saturate(1.1); }
+  .pct { font-family: var(--mono); font-weight: 600; font-size: 18px; }
+  .standings { margin-top: 14px; }
+  .standings table { font-size: 13px; }
+  .standings tr.me td { color: var(--text); font-weight: 600; background: color-mix(in srgb, var(--tc) 22%, transparent); }
+  .standings tr.cut td { border-bottom: 2px dashed var(--muted); }
+  .next { font-size: 13px; color: var(--muted); margin-top: 10px; }
+</style>
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body data-root="../../" data-section="apps">
+<div class="wrap">
+  <div class="topbar"><a class="home" href="../">← Apps</a><span class="stamp" id="stamp"></span></div>
+  <h1 class="title">Scoreboard</h1>
+  <p class="lede">Latest results, league position, and playoff chances for the five teams I follow.</p>
+  <div class="grid two" id="teams"></div>
+  <h2>Sources</h2>
+  <ul class="sources" id="sources"></ul>
+  <p class="footer">Refreshed daily at 12:00 AM ET by a scheduled agent. Playoff percentages marked "Claude's estimate" are model-free judgment calls; when a published model is available, the agent uses it and cites it.</p>
+</div>
+<script>
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = d => d ? new Date(d + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : '';
+function standings(t) {
+  const s = t.standings;
+  if (!s.table) return `<div class="standings"><b class="small">${esc(s.title)}</b><p class="small muted">${esc(s.summary)}</p></div>`;
+  const nameIdx = s.columns.indexOf('Team');
+  return `<div class="standings"><b class="small">${esc(s.title)}</b> <span class="small muted">· ${esc(s.summary)}</span>
+    <div class="table-wrap"><table><thead><tr>${s.columns.map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>
+    ${s.table.map((row, i) => `<tr class="${row[nameIdx] === s.highlight ? 'me' : ''} ${s.cut_line && i + 1 === s.cut_line ? 'cut' : ''}">${row.map((v, j) => `<td class="${typeof v === 'number' ? 'num' : ''}">${esc(s.columns[j] === 'PD' && v > 0 ? '+' + v : v)}</td>`).join('')}</tr>`).join('')}
+    </tbody></table></div></div>`;
+}
+fetch('data.json', { cache: 'no-store' }).then(r => r.json()).then(d => {
+  document.getElementById('stamp').textContent = 'Updated ' + new Date(d.updated).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+  document.getElementById('teams').innerHTML = d.teams.map(t => {
+    const g = t.last_game, p = t.playoffs;
+    return `<section class="card team" style="--tc:${t.color}">
+      <header><div><h3>${esc(t.name)}</h3><div class="league">${esc(t.sport)} · ${esc(t.league)}</div></div><div class="record">${esc(t.record)}</div></header>
+      <div class="score"><div class="res ${g.result}">${g.result}</div>
+        <div><div class="nums">${g.score_for}–${g.score_against}</div><div class="vs">${g.home ? 'vs' : '@'} ${esc(g.opponent)} · ${fmt(g.date)} · ${esc(g.competition)}</div></div></div>
+      <div class="form">${(t.recent || []).map(r => `<span class="${r.result}" title="${esc(r.opponent)} ${esc(r.score)} ${esc(r.competition || '')}">${r.result} ${esc(r.score)}</span>`).join('')}</div>
+      ${standings(t)}
+      <div class="odds"><div><b class="small">${esc(p.label)}</b><div class="bar"><i style="width:${Math.max(2, p.probability)}%"></i></div></div><div class="pct">${p.probability}%</div></div>
+      ${p.secondary ? `<div class="small" style="margin-top:6px"><span class="pill good">${esc(p.secondary.label)}: ${esc(p.secondary.value)}</span></div>` : ''}
+      <p class="small muted">${esc(p.explanation)}</p>
+      <div class="next">Next: ${t.next_game.date ? fmt(t.next_game.date) + ' · ' : ''}${esc(t.next_game.opponent)} ${esc(t.next_game.time || '')}</div>
+    </section>`;
+  }).join('');
+  document.getElementById('sources').innerHTML = d.sources.map(s => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></li>`).join('');
+}).catch(() => { document.getElementById('teams').innerHTML = '<div class="card empty">Could not load data.json.</div>'; });
+</script>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

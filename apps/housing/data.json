@@ -1,0 +1,45 @@
+{
+  "updated": "2026-11-17T14:30:00-05:00",
+  "area": "Brandon, FL (Hillsborough County)",
+  "property": "3 bed / 2 bath",
+  "rent": {
+    "headline": 2135,
+    "method": "Mean of the most recent 3-bedroom averages from five rental-listing trackers.",
+    "observations": [
+      { "source": "RentHop", "value": 2178, "as_of": "Oct 2026", "url": "https://www.renthop.com/average-rent-in/brandon-fl" },
+      { "source": "Zumper", "value": 2200, "as_of": "May 2026", "url": "https://www.zumper.com/rent-research/brandon-fl" },
+      { "source": "Trulia", "value": 2200, "as_of": "May 2026", "url": "https://www.trulia.com/average-rent-market-trends/brandon-fl/" },
+      { "source": "RentCafe", "value": 2142, "as_of": "2026", "url": "https://www.rentcafe.com/average-rent-market-trends/us/fl/brandon/" },
+      { "source": "Apartments.com (apartments only)", "value": 1953, "as_of": "Jun 2026", "url": "https://www.apartments.com/local-guide/brandon-fl/" }
+    ],
+    "trend_note": "3-bed rents are roughly flat year over year (RentHop +0.7%, Zumper +3%); apartment-only rents dipped about 3% (Apartments.com)."
+  },
+  "price": {
+    "headline": 374000,
+    "basis": "Median sold price, all Brandon homes, trailing 12 months. Brandon's median home is a 3-bed of about 1,700 sq ft, so this is a reasonable proxy for a typical 3/2.",
+    "observations": [
+      { "source": "Momentum Research (MLS)", "value": 374000, "as_of": "Sep 2026", "url": "https://movewithmomentum.com/market/brandon/" },
+      { "source": "TopHap — ZIP 33511", "value": 367000, "as_of": "Aug 2026", "url": "https://os.tophap.com/api/reports/geo/zip/33511" },
+      { "source": "Horizon Palm Realty", "value": 373250, "as_of": "May 2026", "url": "https://horizonpalmrealty.com/market/brandon-fl" }
+    ],
+    "trend_note": "Prices are flat to slightly up (Momentum +1.8% YoY; ZIP 33511 −3.9%). Homes go under contract in about 36 days, with about 3.7 months of supply."
+  },
+  "assumptions": {
+    "rate_pct": 4.5,
+    "term_years": 30,
+    "default_down_pct": 20,
+    "property_tax_mills": 15.73,
+    "homestead_exemption": 50000,
+    "insurance_annual": 2425,
+    "pmi_annual_pct": 0.5,
+    "hoa_monthly": 0,
+    "notes": [
+      { "text": "Property tax: Hillsborough County's 2025 total millage is about 15.73 mills, applied after a ~$50k homestead exemption.", "url": "https://movewithmomentum.com/florida-property-tax/hillsborough" },
+      { "text": "Insurance: average Citizens premium for Hillsborough County, 2026 approved rate ($2,425/yr).", "url": "https://movewithmomentum.com/home-insurance-cost-lithia" },
+      { "text": "The 4.5% rate is your fixed what-if rate, not today's market rate. PMI is assumed at 0.5%/yr when the down payment is under 20%.", "url": null }
+    ]
+  },
+  "history": [
+    { "week": "2026-11-16", "rent": 2135, "price": 374000 }
+  ]
+}

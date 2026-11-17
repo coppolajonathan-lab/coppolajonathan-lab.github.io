@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campaign Forge</title>
+<link rel="stylesheet" href="../../assets/apps.css">
+<style>
+  :root { --accent: #5b4bb5; --accent-ink: #ffffff; }
+  body { min-height: 100vh; }
+  .wrap { display: flex; flex-direction: column; min-height: 100vh; padding-bottom: 20px; }
+  .modebar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 6px 0 14px; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .seg button { background: transparent; border: 0; padding: 8px 14px; color: var(--muted); font-weight: 600; }
+  .seg button.on { background: var(--accent); color: var(--accent-ink); }
+  .settings { margin-left: auto; }
+  #log { flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 6px 0 16px; }
+  .msg { max-width: 860px; border-radius: 14px; padding: 14px 18px; line-height: 1.55; }
+  .msg.user { align-self: flex-end; background: color-mix(in srgb, var(--accent) 18%, var(--panel)); border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); }
+  .msg.bot { align-self: flex-start; background: var(--panel); border: 1px solid var(--line); }
+  .msg.bot h3 { font-family: var(--display); font-size: 18px; margin: 14px 0 6px; }
+  .msg.bot h3:first-child, .msg.bot h2:first-child { margin-top: 0; }
+  .msg.bot h2 { font-size: 20px; margin: 14px 0 6px; }
+  .msg.bot ul, .msg.bot ol { padding-left: 20px; margin: 6px 0; }
+  .msg.bot p { margin: 6px 0; }
+  .msg.bot code { font-family: var(--mono); font-size: 13px; background: var(--panel-2); padding: 1px 5px; border-radius: 5px; }
+  .msg.err { border-color: var(--bad); color: var(--bad); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 4px; }
+  .chip { background: var(--panel); border: 1px solid var(--line); color: var(--text); border-radius: 999px; padding: 7px 13px; font-size: 13px; }
+  .chip:hover { border-color: var(--accent); }
+  .composer { position: sticky; bottom: 0; background: linear-gradient(to top, var(--bg) 75%, transparent); padding-top: 14px; }
+  .composer form { display: flex; gap: 10px; align-items: flex-end; }
+  .composer textarea { resize: none; min-height: 52px; max-height: 200px; }
+  dialog { background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 14px; max-width: 520px; width: 92vw; }
+  dialog::backdrop { background: rgba(0,0,0,.6); }
+  dialog label { display: block; font-size: 13px; color: var(--muted); margin: 12px 0 4px; }
+  .riddle { margin-top: 10px; background: var(--panel-2); border: 1px dashed color-mix(in srgb, var(--accent) 50%, transparent); border-radius: 10px; padding: 8px 12px; font-size: 14px; }
+  .riddle summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+  .riddle p { margin: 8px 0; }
+  .welcome h2 { margin-top: 10px; }
+  .cursor::after { content: "▍"; animation: blink 1s steps(2) infinite; color: var(--accent); }
+  @keyframes blink { 50% { opacity: 0; } }
+</style>
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body data-root="../../" data-section="forge">
+<div class="wrap">
+  <div class="topbar"><a class="home" href="../">← Apps</a><span class="stamp" id="keyState"></span></div>
+  <h1 class="title">Campaign Forge</h1>
+  <div class="modebar">
+    <div class="seg" role="tablist" aria-label="Game system">
+      <button id="mDnd" class="on" data-mode="dnd">D&amp;D / fantasy</button>
+      <button id="mDcc" data-mode="dcc">Dungeon Crawler Carl</button>
+    </div>
+    <button class="btn ghost" id="newChat">New campaign</button>
+    <button class="btn ghost settings" id="openSettings">⚙ Settings</button>
+  </div>
+
+  <div id="log">
+    <div class="welcome card" id="welcome">
+      <p style="margin-top:0">Pitch an idea in a sentence or a paragraph. You'll get back a starter kit: the hook, the threat, three paths forward, NPCs, and encounter seeds, plus a few questions to sharpen it.</p><p class="small muted" style="margin:0 0 6px">🔐 To enter the forge, open <b>⚙ Settings</b> and solve the riddle for the passphrase.</p>
+      <div class="chips" id="chips"></div>
+    </div>
+  </div>
+
+  <div class="composer">
+    <form id="form">
+      <textarea class="field" id="input" placeholder="e.g. A heist in a floating city where the vault is a sleeping god…" rows="2"></textarea>
+      <button class="btn" id="send" type="submit">Forge</button>
+    </form>
+    <p class="small muted" style="margin:8px 2px 0" id="footNote"></p>
+  </div>
+</div>
+
+<dialog id="settings">
+  <form method="dialog">
+    <h2 style="margin-top:0">Settings</h2>
+    <label for="conn">Connection</label>
+    <select class="field" id="conn">
+      <option value="proxy">Table passphrase (uses Jonathan's key)</option>
+      <option value="own">My own Anthropic API key</option>
+    </select>
+    <div id="passBox">
+      <label for="pass">Passphrase</label>
+      <input class="field" id="pass" type="text" placeholder="Solve the riddle…" autocomplete="off" spellcheck="false">
+      <details class="riddle">
+        <summary>📜 A riddle carved above the door</summary>
+        <p><i>Three words spoken as one breath. No gaps between them, and each word stands tall at its start.</i></p>
+        <p>The first two are the battle-cry of any party that walks in together: two short words that declare who stands here.</p>
+        <p>The third is what the bards call those who charge when fear says flee. It rhymes with <i>gallant</i>, and a certain comic-strip prince wore it as his name.</p>
+        <p class="small muted">Speak it as the party would, about themselves.</p>
+      </details>
+    </div>
+    <div id="keyBox">
+      <label for="apiKey">Anthropic API key</label>
+      <input class="field" id="apiKey" type="password" placeholder="sk-ant-…" autocomplete="off">
+    </div>
+    <label for="model">Model</label>
+    <select class="field" id="model">
+      <option value="claude-sonnet-5-5">Claude Sonnet 5.5 (fast, great default)</option>
+      <option value="claude-opus-5-5">Claude Opus 5.5 (deepest)</option>
+      <option value="claude-haiku-5-5">Claude Haiku 5.5 (quickest)</option>
+    </select>
+    <label><input type="checkbox" id="remember" checked> Remember this in this browser</label>
+    <p class="small muted" id="connHelp"></p>
+    <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:14px">
+      <button class="btn ghost" value="cancel">Cancel</button>
+      <button class="btn" id="saveSettings" value="save">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="config.js"></script>
+<script src="prompts.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+  set(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {} }
+};
+const PROXY = ((window.FORGE_CONFIG || {}).proxyUrl || '').replace(/\/+$/, '');
+let conn = PROXY ? (store.get('forge.conn') || 'proxy') : 'own';
+let pass = store.get('forge.pass') || '';
+let apiKey = store.get('forge.key') || '';
+let model = store.get('forge.model') || 'claude-sonnet-5-5';
+let mode = store.get('forge.mode') || 'dnd';
+let history = [];
+let busy = false;
+
+const STARTERS = {
+  dnd: [
+    'A city-intrigue campaign where the guild elections are rigged by a dragon in disguise',
+    'A heist in a floating city where the vault is a sleeping god',
+    'A one-shot for new players: a haunted lighthouse that only appears during storms',
+    'A gothic campaign where the party are the monsters villagers hunt'
+  ],
+  dcc: [
+    'Floor 2 neighborhood: a dungeon-run timeshare resort whose Boss is a predatory sales manager',
+    'A Boss battle in a collapsing bowling alley, with lane-themed traps',
+    'An interview-show segment where the host secretly works for a rival crawler',
+    'A heartbreak beat: the crawlers find a saferoom shaped like one crawler\'s childhood home'
+  ]
+};
+
+function esc(s) { return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function md(src) {
+  const lines = esc(src).split('\n'); let out = '', list = null;
+  const inline = t => t.replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<i>$2</i>');
+  const close = () => { if (list) { out += `</${list}>`; list = null; } };
+  for (const raw of lines) {
+    const l = raw.trimEnd();
+    let m;
+    if ((m = l.match(/^(#{1,4})\s+(.*)/))) { close(); const lv = Math.min(3, Math.max(2, m[1].length)); out += `<h${lv}>${inline(m[2])}</h${lv}>`; }
+    else if ((m = l.match(/^\s*[-*•]\s+(.*)/))) { if (list !== 'ul') { close(); out += '<ul>'; list = 'ul'; } out += `<li>${inline(m[1])}</li>`; }
+    else if ((m = l.match(/^\s*\d+[.)]\s+(.*)/))) { if (list !== 'ol') { close(); out += '<ol>'; list = 'ol'; } out += `<li>${inline(m[1])}</li>`; }
+    else if (/^\s*(---|\*\*\*)\s*$/.test(l)) { close(); out += '<hr style="border:0;border-top:1px solid var(--line)">'; }
+    else if (!l.trim()) { close(); }
+    else { close(); out += `<p>${inline(l)}</p>`; }
+  }
+  close(); return out;
+}
+
+function setMode(m) {
+  mode = m; store.set('forge.mode', m);
+  document.querySelectorAll('.seg button').forEach(b => b.classList.toggle('on', b.dataset.mode === m));
+  $('chips').innerHTML = STARTERS[m].map(s => `<button class="chip" type="button">${esc(s)}</button>`).join('');
+  $('chips').querySelectorAll('.chip').forEach(c => c.onclick = () => { $('input').value = c.textContent; $('input').focus(); });
+  $('input').placeholder = m === 'dcc' ? 'e.g. A Neighborhood where every Mob is a cursed mall mascot…' : 'e.g. A heist in a floating city where the vault is a sleeping god…';
+}
+const ready = () => conn === 'proxy' ? !!pass : !!apiKey;
+function keyState() {
+  $('keyState').textContent = ready() ? `${model} · ${conn === 'proxy' ? 'passphrase set' : 'own key set'}` : (conn === 'proxy' ? 'Enter the passphrase in Settings' : 'No API key: open Settings');
+  $('footNote').textContent = conn === 'proxy'
+    ? 'Runs on Claude through Jonathan\'s account via a private proxy. You only need the table passphrase.'
+    : 'Runs on Claude through your own Anthropic API key, which stays in this browser and is sent only to api.anthropic.com.';
+}
+function syncSettingsUI() {
+  const c = $('conn').value;
+  $('passBox').style.display = c === 'proxy' ? '' : 'none';
+  $('keyBox').style.display = c === 'own' ? '' : 'none';
+  $('connHelp').textContent = c === 'proxy' ? 'Solve the riddle or ask the GM. Usage is billed to Jonathan\'s account, so please forge responsibly.' : 'Get a key at console.anthropic.com. Usage is billed to that key\'s account.';
+}
+if (!PROXY) $('conn').querySelector('option[value="proxy"]').disabled = true;
+$('conn').onchange = syncSettingsUI;
+function bubble(role, html, cls = '') {
+  const d = document.createElement('div'); d.className = `msg ${role} ${cls}`; d.innerHTML = html;
+  $('log').appendChild(d); d.scrollIntoView({ block: 'end', behavior: 'smooth' }); return d;
+}
+
+async function send(text) {
+  if (busy || !text.trim()) return;
+  if (!ready()) { $('openSettings').click(); return; }
+  $('welcome')?.remove();
+  busy = true; $('send').disabled = true;
+  history.push({ role: 'user', content: text });
+  bubble('user', md(text));
+  const out = bubble('bot', '', 'cursor'); let acc = '';
+  try {
+    const viaProxy = conn === 'proxy';
+    const res = await fetch(viaProxy ? `${PROXY}/v1/messages` : 'https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: viaProxy
+        ? { 'content-type': 'application/json', 'x-forge-pass': pass }
+        : {
+            'content-type': 'application/json',
+            'x-api-key': apiKey,
+            'anthropic-version': '2023-06-01',
+            'anthropic-dangerous-direct-browser-access': 'true'
+          },
+      body: JSON.stringify({ model, max_tokens: 4096, stream: true, system: window.FORGE_PROMPTS[mode], messages: history })
+    });
+    if (!res.ok) { const e = await res.json().catch(() => ({})); throw new Error(e.error?.message || `HTTP ${res.status}`); }
+    const reader = res.body.getReader(); const dec = new TextDecoder(); let buf = '';
+    while (true) {
+      const { value, done } = await reader.read(); if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let i; while ((i = buf.indexOf('\n\n')) >= 0) {
+        const chunk = buf.slice(0, i); buf = buf.slice(i + 2);
+        const data = chunk.split('\n').find(l => l.startsWith('data:'));
+        if (!data) continue;
+        const ev = JSON.parse(data.slice(5));
+        if (ev.type === 'content_block_delta' && ev.delta?.type === 'text_delta') { acc += ev.delta.text; out.innerHTML = md(acc); }
+        if (ev.type === 'error') throw new Error(ev.error?.message || 'Stream error');
+      }
+      out.scrollIntoView({ block: 'end' });
+    }
+    history.push({ role: 'assistant', content: acc });
+  } catch (e) {
+    history.pop();
+    out.classList.add('err'); out.innerHTML = /passphrase/i.test(e.message) ? `🚪 The door stays shut: that isn't the passphrase. Check the riddle in Settings, and mind the capitals and spaces.` : `Couldn't reach Claude: ${esc(e.message)}. Check the ${conn === 'proxy' ? 'passphrase' : 'API key'} and model in Settings.`;
+  } finally {
+    out.classList.remove('cursor'); busy = false; $('send').disabled = false; $('input').focus();
+  }
+}
+
+$('form').onsubmit = e => { e.preventDefault(); const t = $('input').value; $('input').value = ''; send(t); };
+$('input').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); $('form').requestSubmit(); } });
+$('input').addEventListener('input', e => { e.target.style.height = 'auto'; e.target.style.height = Math.min(200, e.target.scrollHeight) + 'px'; });
+document.querySelectorAll('.seg button').forEach(b => b.onclick = () => { if (history.length && b.dataset.mode !== mode && !confirm('Switching systems starts a new campaign. Continue?')) return; if (b.dataset.mode !== mode) { history = []; resetLog(); } setMode(b.dataset.mode); });
+function resetLog() { $('log').innerHTML = `<div class="welcome card" id="welcome"><p style="margin-top:0">Pitch an idea in a sentence or a paragraph. You'll get back a starter kit: the hook, the threat, three paths forward, NPCs, and encounter seeds, plus a few questions to sharpen it.</p><p class="small muted" style="margin:0 0 6px">🔐 To enter the forge, open <b>⚙ Settings</b> and solve the riddle for the passphrase.</p><div class="chips" id="chips"></div></div>`; setMode(mode); }
+$('newChat').onclick = () => { history = []; resetLog(); };
+$('openSettings').onclick = () => { $('conn').value = conn; $('pass').value = pass; $('apiKey').value = apiKey; $('model').value = model; syncSettingsUI(); $('settings').showModal(); };
+$('settings').addEventListener('close', () => {
+  if ($('settings').returnValue !== 'save') return;
+  conn = $('conn').value; pass = $('pass').value.trim(); apiKey = $('apiKey').value.trim(); model = $('model').value;
+  const keep = $('remember').checked;
+  store.set('forge.conn', conn); store.set('forge.model', model);
+  store.set('forge.pass', keep && pass ? pass : null); store.set('forge.key', keep && apiKey ? apiKey : null);
+  keyState();
+});
+setMode(mode); keyState();
+</script>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

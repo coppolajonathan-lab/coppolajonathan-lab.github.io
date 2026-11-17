@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What I'm Up To · Jonathan Coppola</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f6f1e7; --paper-2: #efe7d7; --ink: #1d1a17; --muted: #6b6359;
+    --wine: #7a1f2b; --gold: #b08d4a; --line: #d9cdb6; --teal: #2f6f68;
+    --serif: "Fraunces", Georgia, serif; --sans: "Inter", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.6; }
+  a { color: var(--wine); }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+
+  header { padding: 60px 0 30px; }
+  .kicker { font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  h1 { font-family: var(--serif); font-weight: 800; font-size: clamp(40px, 7vw, 72px); line-height: 1; margin: 12px 0 10px; letter-spacing: -0.02em; }
+  .intro { font-size: 18px; color: #3a342e; max-width: 640px; margin: 0; }
+  .updated { font-size: 13px; color: var(--muted); margin-top: 10px; }
+
+  section { padding: 44px 0 10px; scroll-margin-top: 60px; }
+  .jump { margin: 14px 0 0; font-size: 14px; }
+  .jump a { color: var(--muted); margin-right: 14px; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 20px; }
+  .sec-head h2 { font-family: var(--serif); font-weight: 800; font-size: clamp(26px, 4vw, 36px); margin: 0; }
+  .sec-head .rule { flex: 1; height: 1px; background: var(--line); }
+  .sec-head .count { font-size: 13px; color: var(--muted); }
+
+  .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
+  .card { background: #fffaf0; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
+  .card .body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+  .card h3 { font-family: var(--serif); font-size: 22px; margin: 0; line-height: 1.2; }
+  .meta { font-size: 13px; color: var(--muted); }
+  .pill { align-self: flex-start; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; background: var(--wine); color: #fff; }
+  .pill.teal { background: var(--teal); }
+  .pill.gold { background: var(--gold); }
+  .card p { margin: 4px 0 0; }
+  .card .more { margin-top: auto; padding-top: 10px; font-size: 14px; font-weight: 600; }
+
+  .cover { aspect-ratio: 4 / 3; background: var(--ink); position: relative; overflow: hidden; }
+  .cover img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
+  .card:hover .cover img { transform: scale(1.03); }
+  .cover.placeholder { display: grid; place-items: center; background:
+      radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--gold) 35%, transparent), transparent 55%), var(--ink); }
+  .cover.placeholder span { font-family: var(--serif); font-style: italic; color: #f3ead7; font-size: 28px; text-align: center; padding: 0 20px; line-height: 1.15; }
+  .cover.placeholder small { display: block; font-family: var(--sans); font-style: normal; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-top: 10px; }
+
+  .thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 10px; }
+  .thumbs button { padding: 0; border: 0; background: var(--paper-2); aspect-ratio: 1; cursor: zoom-in; border-radius: 6px; overflow: hidden; }
+  .thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .thumbs .more-n { display: grid; place-items: center; font-weight: 600; color: var(--muted); font-size: 14px; }
+
+  .empty { border: 2px dashed var(--line); border-radius: 16px; padding: 28px; text-align: center; color: var(--muted); font-family: var(--serif); font-style: italic; font-size: 18px; }
+
+  .work { display: grid; gap: 14px; }
+  .work-item { display: grid; grid-template-columns: 110px 1fr; gap: 18px; padding: 18px 0; border-top: 1px solid var(--line); }
+  .work-item:first-child { border-top: 0; }
+  .work-item .when { font-size: 13px; color: var(--muted); }
+  .work-item h3 { margin: 0; font-size: 18px; }
+  .work-item .org { color: var(--wine); font-weight: 600; font-size: 14px; }
+  .work-item p { margin: 6px 0 0; color: #3a342e; }
+
+  dialog.lightbox { padding: 0; border: 0; background: transparent; max-width: 96vw; max-height: 94vh; }
+  dialog.lightbox::backdrop { background: rgba(15, 12, 10, .92); }
+  .lb { position: relative; display: flex; flex-direction: column; align-items: center; }
+  .lb img { max-width: 92vw; max-height: 82vh; border-radius: 8px; display: block; }
+  .lb .cap { color: #f3ead7; font-size: 14px; margin-top: 10px; text-align: center; }
+  .lb button { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.12); color: #fff; border: 0; width: 46px; height: 46px; border-radius: 50%; font-size: 22px; cursor: pointer; }
+  .lb .prev { left: 2vw; } .lb .next { right: 2vw; }
+  .lb .close { top: 24px; right: 2vw; transform: none; }
+
+  @media (max-width: 640px) { .work-item { grid-template-columns: 1fr; gap: 4px; } }
+</style>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-root="../" data-section="now">
+
+<div class="wrap">
+  <header>
+    <div class="kicker">Jonathan Coppola</div>
+    <h1>What I'm Up To</h1>
+    <p class="intro" id="intro"></p>
+    <p class="updated" id="updated"></p>
+    <p class="jump"><a href="#work">Professionally</a><a href="#upcoming">Upcoming shows</a><a href="#past">Past shows</a><a href="#campaigns">Campaigns</a></p>
+  </header>
+
+  <section id="work">
+    <div class="sec-head"><h2>Professionally</h2><span class="rule"></span></div>
+    <div class="work" id="workList"></div>
+  </section>
+
+  <section id="upcoming">
+    <div class="sec-head"><h2>Upcoming shows</h2><span class="rule"></span><span class="count" id="upCount"></span></div>
+    <div id="upcomingList"></div>
+  </section>
+
+  <section id="past">
+    <div class="sec-head"><h2>Past shows</h2><span class="rule"></span><span class="count" id="pastCount"></span></div>
+    <div class="grid" id="pastList"></div>
+  </section>
+
+  <section id="campaigns">
+    <div class="sec-head"><h2>Campaigns</h2><span class="rule"></span><span class="count" id="campCount"></span></div>
+    <div class="grid" id="campList"></div>
+  </section>
+
+</div>
+
+<dialog class="lightbox" id="lb">
+  <div class="lb">
+    <img id="lbImg" alt="">
+    <div class="cap" id="lbCap"></div>
+    <button class="prev" id="lbPrev" aria-label="Previous photo">‹</button>
+    <button class="next" id="lbNext" aria-label="Next photo">›</button>
+    <button class="close" id="lbClose" aria-label="Close">×</button>
+  </div>
+</dialog>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = d => new Date(d + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+const galleries = {};   // id -> [{src, caption}]
+let lbList = [], lbIdx = 0;
+
+function cover(item, title, sub) {
+  return item.cover
+    ? `<div class="cover"><img src="${esc(item.cover)}" alt="${esc(title)}" loading="lazy"></div>`
+    : `<div class="cover placeholder"><span>${esc(title)}<small>${esc(sub)}</small></span></div>`;
+}
+function thumbs(id, photos) {
+  if (!photos || !photos.length) return '';
+  galleries[id] = photos;
+  const show = photos.slice(0, 4);
+  return `<div class="thumbs">${show.map((ph, i) => {
+    const extra = i === 3 && photos.length > 4 ? photos.length - 4 : 0;
+    return `<button data-g="${esc(id)}" data-i="${i}" aria-label="Open photo ${i + 1}">${extra
+      ? `<span class="more-n">+${extra + 1}</span>` : `<img src="${esc(ph.src)}" alt="${esc(ph.caption || '')}" loading="lazy">`}</button>`;
+  }).join('')}</div>`;
+}
+function openLb(id, i) { lbList = galleries[id]; lbIdx = i; showLb(); $('lb').showModal(); }
+function showLb() { const p = lbList[lbIdx]; $('lbImg').src = p.src; $('lbImg').alt = p.caption || ''; $('lbCap').textContent = `${p.caption || ''}  (${lbIdx + 1} / ${lbList.length})`; }
+$('lbPrev').onclick = () => { lbIdx = (lbIdx - 1 + lbList.length) % lbList.length; showLb(); };
+$('lbNext').onclick = () => { lbIdx = (lbIdx + 1) % lbList.length; showLb(); };
+$('lbClose').onclick = () => $('lb').close();
+$('lb').addEventListener('click', e => { if (e.target === $('lb')) $('lb').close(); });
+document.addEventListener('keydown', e => { if (!$('lb').open) return; if (e.key === 'ArrowLeft') $('lbPrev').click(); if (e.key === 'ArrowRight') $('lbNext').click(); });
+document.addEventListener('click', e => { const b = e.target.closest('.thumbs button, .cover[data-g]'); if (b) openLb(b.dataset.g, +b.dataset.i || 0); });
+
+fetch('content.json', { cache: 'no-store' }).then(r => r.json()).then(d => {
+  $('intro').textContent = d.intro;
+  $('updated').textContent = 'Last updated ' + fmt(d.updated);
+
+  $('workList').innerHTML = d.professional.map(w => `<div class="work-item">
+    <div><span class="pill ${w.status === 'Now' ? '' : 'teal'}">${esc(w.status)}</span><div class="when" style="margin-top:6px">${w.since ? 'since ' + esc(w.since) : ''}</div></div>
+    <div><h3>${w.link ? `<a href="${esc(w.link)}"${/^https?:/.test(w.link) ? ' target="_blank" rel="noopener"' : ''}>${esc(w.title)}</a>` : esc(w.title)}</h3>
+    <div class="org">${esc(w.org)}</div><p>${esc(w.description)}</p></div></div>`).join('');
+
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const up = d.upcoming_shows.filter(s => !s.end || new Date(s.end + 'T23:59:59') >= today)
+    .sort((a, b) => (a.start || '').localeCompare(b.start || ''));
+  $('upCount').textContent = up.length ? `${up.length} on the calendar` : '';
+  $('upcomingList').innerHTML = up.length ? `<div class="grid">${up.map(s => `<article class="card">
+      ${cover({ cover: s.poster }, s.show, s.company)}
+      <div class="body"><span class="pill gold">${esc(s.dates_text || (s.start ? fmt(s.start) : 'Dates TBA'))}</span>
+      <h3>${esc(s.show)}</h3><div class="meta">${esc(s.role)} · ${esc(s.company)}${s.venue ? ' · ' + esc(s.venue) : ''}</div>
+      ${s.blurb ? `<p>${esc(s.blurb)}</p>` : ''}
+      ${s.tickets_url ? `<a class="more" href="${esc(s.tickets_url)}" target="_blank" rel="noopener">Get tickets →</a>` : ''}</div></article>`).join('')}</div>`
+    : `<div class="empty">${esc(d.upcoming_empty_note)}</div>`;
+
+  $('pastCount').textContent = `${d.past_shows.length} production${d.past_shows.length === 1 ? '' : 's'}`;
+  $('pastList').innerHTML = d.past_shows.map(s => `<article class="card">
+    ${cover(s, s.show, s.year)}
+    <div class="body"><h3>${esc(s.show)}</h3><div class="meta">${esc(s.role)} · ${esc(s.company)}${s.director ? ' · dir. ' + esc(s.director) : ''} · ${esc(s.year)}</div>
+    ${s.blurb ? `<p>${esc(s.blurb)}</p>` : ''}${thumbs('show-' + s.slug, s.photos)}
+    ${s.photos && s.photos.length ? '' : '<p class="meta" style="margin-top:auto;padding-top:8px"><i>Photos coming soon</i></p>'}</div></article>`).join('');
+
+  $('campCount').textContent = `${d.campaigns.length} at the table`;
+  $('campList').innerHTML = d.campaigns.map(c => `<article class="card">
+    ${cover(c, c.name, c.system)}
+    <div class="body"><span class="pill teal">${esc(c.status)}</span><h3>${esc(c.name)}</h3>
+    <div class="meta">${esc(c.role)} · ${esc(c.system)}</div><p>${esc(c.blurb)}</p>${thumbs('camp-' + c.slug, c.photos)}</div></article>`).join('');
+
+  // Make covers with galleries open the lightbox too
+  [...d.past_shows.map(s => ['show-' + s.slug, s]), ...d.campaigns.map(c => ['camp-' + c.slug, c])].forEach(([id, item]) => {
+    if (item.cover && item.photos && item.photos.length) {
+      const el = [...document.querySelectorAll('.cover img')].find(i => i.getAttribute('src') === item.cover);
+      if (el) { el.parentElement.dataset.g = id; el.parentElement.style.cursor = 'zoom-in'; }
+    }
+  });
+});
+</script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

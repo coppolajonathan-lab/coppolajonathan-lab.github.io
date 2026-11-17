@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apps · Jonathan Coppola</title>
+<link rel="stylesheet" href="../assets/apps.css">
+<style>
+  .hero { padding: 30px 0 10px; }
+  .hero .kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .apps { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-top: 26px; }
+  .app { position: relative; display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: var(--text);
+         background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; min-height: 230px;
+         transition: transform .15s ease, border-color .15s ease; overflow: hidden; }
+  .app::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--c); }
+  .app:hover { transform: translateY(-3px); border-color: var(--c); }
+  .app .glyph { font-size: 30px; line-height: 1; }
+  .app h3 { font-family: var(--display); font-weight: 800; font-size: 23px; margin: 4px 0 0; }
+  .app p { color: var(--muted); font-size: 14px; margin: 0; flex: 1; }
+  .app .meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
+  .app .meta .upd { font-family: var(--mono); }
+</style>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-root="../" data-section="apps">
+<div class="wrap">
+  <header class="hero">
+    <div class="kicker">Apps</div>
+    <h1 class="title">The Workbench</h1>
+    <p class="lede">Four small tools: auditions worth singing for, the teams I follow, what a 3/2 costs in Brandon, and a campaign forge for D&amp;D and Dungeon Crawler Carl. The data pages refresh themselves on a schedule.</p>
+  </header>
+
+  <main class="apps">
+    <a class="app" href="theater/" style="--c:#a3405e">
+      <div class="glyph">🎭</div>
+      <h3>Baritenor Casting Call</h3>
+      <p>Upcoming community-theater musical auditions within an hour of Tampa, filtered to roles that sit in a baritenor range.</p>
+      <div class="meta"><span>Updates daily · 12:00 AM ET</span><span class="upd" data-src="theater/data.json"></span></div>
+    </a>
+    <a class="app" href="sports/" style="--c:#2f6f68">
+      <div class="glyph">🏈</div>
+      <h3>Scoreboard</h3>
+      <p>USF Bulls, Munster, Leicester Tigers, Buccaneers and Patriots: latest results, standings, and playoff odds.</p>
+      <div class="meta"><span>Updates daily · 12:00 AM ET</span><span class="upd" data-src="sports/data.json"></span></div>
+    </a>
+    <a class="app" href="housing/" style="--c:#9a6b1f">
+      <div class="glyph">🏠</div>
+      <h3>Brandon 3/2 Watch</h3>
+      <p>Average rent for a 3-bed in Brandon, FL compared with the monthly payment on a typical 3/2 at a 4.5% rate.</p>
+      <div class="meta"><span>Updates Mondays · 12:00 AM ET</span><span class="upd" data-src="housing/data.json"></span></div>
+    </a>
+    <a class="app" href="campaign-forge/" style="--c:#5b4bb5">
+      <div class="glyph">🐉</div>
+      <h3>Campaign Forge</h3>
+      <p>Pitch a campaign idea and get a game master's partner back: hooks, NPCs, paths forward, for D&amp;D or Dungeon Crawler Carl.</p>
+      <div class="meta"><span>Chatbot · solve the riddle to enter</span><span></span></div>
+    </a>
+  </main>
+
+</div>
+<script>
+  document.querySelectorAll('.upd[data-src]').forEach(async el => {
+    try {
+      const r = await fetch(el.dataset.src, { cache: 'no-store' });
+      const d = await r.json();
+      if (d.updated) el.textContent = 'last ' + new Date(d.updated).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+    } catch (e) { /* offline or file:// — leave blank */ }
+  });
+</script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

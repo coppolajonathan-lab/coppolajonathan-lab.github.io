@@ -1,0 +1,75 @@
+{
+  "updated": "2026-11-17",
+  "intro": "A running log of what's on my plate: the day job, the stage, and the table.",
+  "professional": [
+    {
+      "title": "Program Manager, Enablement of Technical Product Content",
+      "org": "Darktrace",
+      "status": "Now",
+      "since": "Sep 2026",
+      "description": "Leading the conversion of 24 instructor-led training manuals into hands-on e-learning labs and courses across 7 product lines, and owning the release plan that keeps enablement in step with product launches.",
+      "link": null
+    },
+    {
+      "title": "Cyber Defense Educator / Curriculum Developer",
+      "org": "Darktrace",
+      "status": "Ongoing",
+      "since": "Jul 2020",
+      "description": "Still teaching: training customers, partners and analysts on Darktrace's AI-driven cyber defense platform, with an 83 NPS over six years.",
+      "link": null
+    },
+    {
+      "title": "Personal apps",
+      "org": "Side project",
+      "status": "Building",
+      "since": "Nov 2026",
+      "description": "Small tools that update themselves: a baritenor audition finder, a scoreboard for my teams, a Brandon housing watch, and Campaign Forge.",
+      "link": "../apps/"
+    },
+    {
+      "title": "Jonathan's Apothecary of Scents",
+      "org": "Scentsy consultancy",
+      "status": "Brewing",
+      "since": "",
+      "description": "Fantasy- and TTRPG-themed home fragrance. Brewing Comfort, One Fragrance At a Time.",
+      "link": "https://jonathans-apothecary-of-scents.scentsy.us"
+    }
+  ],
+  "upcoming_shows": [],
+  "upcoming_empty_note": "Between shows and auditioning around Tampa Bay. Next role coming soon.",
+  "past_shows": [
+    {
+      "slug": "come-from-away-2026",
+      "show": "Come From Away",
+      "role": "Oz / Ensemble",
+      "company": "New Tampa Players",
+      "director": "Nora Paine",
+      "year": "2026",
+      "blurb": "My debut with New Tampa Players: a Newfoundland accent, a constable's swagger, and one of the best ensembles I've been part of.",
+      "cover": null,
+      "photos": []
+    }
+  ],
+  "campaigns": [
+    {
+      "slug": "twin-souls",
+      "name": "Chronicles of the Twin Souls",
+      "system": "Dungeons & Dragons 5e",
+      "role": "Dungeon Master",
+      "status": "Ongoing",
+      "blurb": "Urban intrigue in Waterdeep: nightlife, politics, and something supernatural moving under the surface.",
+      "cover": null,
+      "photos": []
+    },
+    {
+      "slug": "dungeon-crawler-carl",
+      "name": "Dungeon Crawler Carl RPG",
+      "system": "Renegade Game Studios",
+      "role": "Game Master",
+      "status": "Session 0 coming up",
+      "blurb": "A brand-new crawl for the group. The dungeon is a game show, the floor is collapsing, and the System AI has opinions.",
+      "cover": null,
+      "photos": []
+    }
+  ]
+}

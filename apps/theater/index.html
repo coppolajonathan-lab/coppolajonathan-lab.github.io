@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baritenor Casting Call · Tampa Bay</title>
+<link rel="stylesheet" href="../../assets/apps.css">
+<style>
+  :root { --accent: #a3405e; --accent-ink: #ffffff; }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 4px 0 18px; }
+  .controls label { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+  .show { margin-bottom: 16px; }
+  .show header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: baseline; }
+  .show h3 { font-family: var(--display); font-size: 22px; margin: 0; }
+  .show .org { color: var(--muted); font-size: 14px; }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px 18px; margin: 12px 0 6px; font-size: 14px; }
+  .facts b { display: block; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .show.past { opacity: .55; }
+  .countdown { font-family: var(--mono); font-size: 12px; }
+  .roles td:first-child { font-weight: 600; white-space: nowrap; }
+  details summary { cursor: pointer; color: var(--muted); font-size: 14px; }
+</style>
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body data-root="../../" data-section="apps">
+<div class="wrap">
+  <div class="topbar"><a class="home" href="../">← Apps</a><span class="stamp" id="stamp"></span></div>
+  <h1 class="title">Baritenor Casting Call</h1>
+  <p class="lede">Upcoming musical auditions at community theaters within about an hour of Tampa, showing only the roles that fit a baritenor. Each entry lists the musical, role, theater group, audition dates, and show dates.</p>
+
+  <div class="controls">
+    <label><input type="checkbox" id="strongOnly"> Strong fits only</label>
+    <label><input type="checkbox" id="showPast"> Show recently closed auditions</label>
+  </div>
+
+  <h2>All matching roles</h2>
+  <div class="card table-wrap"><table id="flat">
+    <thead><tr><th>Musical</th><th>Role</th><th>Theater group</th><th>Audition dates</th><th>Show dates</th><th>Fit</th></tr></thead>
+    <tbody></tbody></table></div>
+
+  <h2>By production</h2>
+  <div id="shows"></div>
+
+  <h2>Watch list: seasons with auditions not posted yet</h2>
+  <div class="card table-wrap"><table id="watch">
+    <thead><tr><th>Musical</th><th>Theater group</th><th>Show dates</th><th>Baritenor roles</th><th>Note</th></tr></thead>
+    <tbody></tbody></table></div>
+
+  <div class="note" id="def"></div>
+  <details class="card"><summary>Theater groups checked</summary><ul class="sources" id="groups"></ul><p class="small muted" id="notes"></p></details>
+  <p class="footer">Refreshed daily at 12:00 AM ET by a scheduled agent. Always confirm the details on the theater's own page before you go.</p>
+</div>
+<script>
+const fmt = d => new Date(d + 'T12:00:00').toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+const today = new Date(); today.setHours(0,0,0,0);
+const lastDate = a => new Date(a.audition_dates[a.audition_dates.length - 1] + 'T23:59:59');
+const firstDate = a => new Date(a.audition_dates[0] + 'T00:00:00');
+const isPast = a => lastDate(a) < today;
+const recent = a => (today - lastDate(a)) / 864e5 <= 30;
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fitPill = f => f === 'strong' ? '<span class="pill accent">Strong</span>' : '<span class="pill">Possible</span>';
+
+let DATA;
+function render() {
+  const strongOnly = document.getElementById('strongOnly').checked;
+  const showPast = document.getElementById('showPast').checked;
+  const list = DATA.auditions
+    .filter(a => !isPast(a) || (showPast && recent(a)))
+    .sort((x, y) => firstDate(x) - firstDate(y));
+
+  const rows = [];
+  list.forEach(a => a.roles.filter(r => !strongOnly || r.fit === 'strong').forEach(r => rows.push({ a, r })));
+  document.querySelector('#flat tbody').innerHTML = rows.length ? rows.map(({ a, r }) => `
+    <tr${isPast(a) ? ' class="muted"' : ''}>
+      <td><a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.musical)}</a></td>
+      <td><b>${esc(r.role)}</b></td>
+      <td>${esc(a.theater_group)}<div class="small muted">${esc(a.city)}</div></td>
+      <td class="num">${a.audition_dates.map(fmt).join('<br>')}${isPast(a) ? '<div class="small">closed</div>' : ''}</td>
+      <td>${esc(a.show_dates_text)}</td>
+      <td>${fitPill(r.fit)}</td>
+    </tr>`).join('') : '<tr><td colspan="6" class="empty">No upcoming baritenor roles right now. Check the watch list below.</td></tr>';
+
+  document.getElementById('shows').innerHTML = list.map(a => {
+    const days = Math.ceil((firstDate(a) - today) / 864e5);
+    const when = isPast(a) ? '<span class="pill bad">Auditions closed</span>'
+      : days <= 0 ? '<span class="pill warn">Auditions today/ongoing</span>'
+      : `<span class="pill good countdown">in ${days} day${days === 1 ? '' : 's'}</span>`;
+    const roles = a.roles.filter(r => !strongOnly || r.fit === 'strong');
+    return `<article class="card show${isPast(a) ? ' past' : ''}">
+      <header><div><h3>${esc(a.musical)}</h3><div class="org">${esc(a.theater_group)} · ${esc(a.city)}</div></div>${when}</header>
+      <div class="facts">
+        <div><b>Auditions</b>${esc(a.audition_text)}</div>
+        <div><b>Performances</b>${esc(a.show_dates_text)}</div>
+        <div><b>Details</b><a href="${esc(a.url)}" target="_blank" rel="noopener">Theater audition page ↗</a></div>
+      </div>
+      <div class="table-wrap"><table class="roles"><thead><tr><th>Role</th><th>Fit</th><th>Listed range</th><th>Notes</th></tr></thead><tbody>
+        ${roles.map(r => `<tr><td>${esc(r.role)}</td><td>${fitPill(r.fit)}</td><td class="small">${esc(r.listed_range)}</td><td class="small">${esc(r.notes)}</td></tr>`).join('') || '<tr><td colspan="4" class="muted">No strong fits in this show.</td></tr>'}
+      </tbody></table></div>
+    </article>`;
+  }).join('') || '<div class="card empty">Nothing to show.</div>';
+}
+
+fetch('data.json', { cache: 'no-store' }).then(r => r.json()).then(d => {
+  DATA = d;
+  document.getElementById('stamp').textContent = 'Updated ' + new Date(d.updated).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+  document.getElementById('def').textContent = d.baritenor_definition;
+  document.querySelector('#watch tbody').innerHTML = (d.watchlist || []).map(w => `
+    <tr><td><a href="${esc(w.url)}" target="_blank" rel="noopener">${esc(w.musical)}</a></td><td>${esc(w.theater_group)}<div class="small muted">${esc(w.city)}</div></td>
+    <td>${esc(w.show_dates_text)}</td><td class="small">${esc(w.roles)}</td><td class="small muted">${esc(w.note)}</td></tr>`).join('');
+  document.getElementById('groups').innerHTML = d.groups_checked.map(g => `<li><a href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.name)}</a> — ${esc(g.city)}</li>`).join('');
+  document.getElementById('notes').textContent = d.notes || '';
+  render();
+}).catch(() => { document.getElementById('shows').innerHTML = '<div class="card empty">Could not load data.json.</div>'; });
+document.getElementById('strongOnly').onchange = render;
+document.getElementById('showPast').onchange = render;
+</script>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

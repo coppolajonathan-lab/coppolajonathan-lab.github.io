@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brandon 3/2 Watch</title>
+<link rel="stylesheet" href="../../assets/apps.css">
+<style>
+  :root { --accent: #9a6b1f; --accent-ink: #ffffff; }
+  .kpis { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .kpi .label { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+  .kpi .val { font-family: var(--display); font-weight: 800; font-size: 40px; line-height: 1.1; margin: 6px 0 4px; }
+  .kpi .sub { font-size: 13px; color: var(--muted); }
+  .verdict { font-size: 16px; margin: 18px 0 0; }
+  .calc { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+  .calc label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 4px; }
+  .breakdown td:last-child { text-align: right; }
+  .breakdown tr.total td { font-weight: 700; border-top: 2px solid var(--line); }
+  .barcmp { display: grid; grid-template-columns: 90px 1fr 90px; gap: 8px 12px; align-items: center; margin-top: 10px; font-size: 14px; }
+  .barcmp .b { height: 18px; border-radius: 6px; background: var(--accent); }
+  .barcmp .b.rent { background: #4a78a8; }
+</style>
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body data-root="../../" data-section="apps">
+<div class="wrap">
+  <div class="topbar"><a class="home" href="../">← Apps</a><span class="stamp" id="stamp"></span></div>
+  <h1 class="title">Brandon 3/2 Watch</h1>
+  <p class="lede">A rough comparison for a 3-bedroom, 2-bath in Brandon, FL: average rent versus the monthly payment on a typical home at a 4.5% fixed rate.</p>
+
+  <div class="kpis">
+    <div class="card kpi"><div class="label">Average 3-bed rent</div><div class="val num" id="kRent">—</div><div class="sub" id="kRentSub"></div></div>
+    <div class="card kpi"><div class="label">Typical 3/2 price</div><div class="val num" id="kPrice">—</div><div class="sub" id="kPriceSub"></div></div>
+    <div class="card kpi"><div class="label">Mortgage P&amp;I at 4.5%</div><div class="val num" id="kPI">—</div><div class="sub" id="kPISub"></div></div>
+    <div class="card kpi"><div class="label">All-in monthly (PITI)</div><div class="val num" id="kPITI">—</div><div class="sub">Principal, interest, taxes, insurance (+PMI if under 20% down)</div></div>
+  </div>
+  <p class="verdict" id="verdict"></p>
+
+  <h2>Play with the numbers</h2>
+  <div class="card">
+    <div class="calc">
+      <div><label for="price">Home price</label><input class="field num" id="price" type="number" step="1000"></div>
+      <div><label for="down">Down payment (%)</label><input class="field num" id="down" type="number" min="0" max="100" step="0.5"></div>
+      <div><label for="rate">Rate (%)</label><input class="field num" id="rate" type="number" step="0.05"></div>
+      <div><label for="term">Term (years)</label><select class="field" id="term"><option>30</option><option>20</option><option>15</option></select></div>
+    </div>
+    <div class="grid two" style="margin-top:16px">
+      <table class="breakdown"><tbody id="bd"></tbody></table>
+      <div><b class="small">Monthly cost: buy vs rent</b><div class="barcmp" id="cmp"></div></div>
+    </div>
+  </div>
+
+  <h2>Where the numbers come from</h2>
+  <div class="grid two">
+    <div class="card"><b>3-bed rent observations</b><div class="table-wrap"><table><thead><tr><th>Source</th><th>As of</th><th>Avg</th></tr></thead><tbody id="rentObs"></tbody></table></div><p class="small muted" id="rentTrend"></p></div>
+    <div class="card"><b>Price observations</b><div class="table-wrap"><table><thead><tr><th>Source</th><th>As of</th><th>Median</th></tr></thead><tbody id="priceObs"></tbody></table></div><p class="small muted" id="priceTrend"></p></div>
+  </div>
+  <ul class="sources" id="assume"></ul>
+  <p class="footer">Refreshed every Monday at 12:00 AM ET by a scheduled agent. This is a generic estimate, not financial advice: get real quotes for taxes, insurance and rates.</p>
+</div>
+<script>
+const $ = id => document.getElementById(id);
+const usd = n => '$' + Math.round(n).toLocaleString();
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function pmt(principal, ratePct, years) {
+  const r = ratePct / 100 / 12, n = years * 12;
+  return r === 0 ? principal / n : principal * r / (1 - Math.pow(1 + r, -n));
+}
+let D;
+function calc() {
+  const a = D.assumptions;
+  const price = +$('price').value, down = +$('down').value, rate = +$('rate').value, term = +$('term').value;
+  const loan = price * (1 - down / 100);
+  const pi = pmt(loan, rate, term);
+  const tax = Math.max(0, price - a.homestead_exemption) * a.property_tax_mills / 1000 / 12;
+  const ins = a.insurance_annual / 12;
+  const pmi = down < 20 ? loan * a.pmi_annual_pct / 100 / 12 : 0;
+  const hoa = a.hoa_monthly || 0;
+  const total = pi + tax + ins + pmi + hoa;
+  return { price, down, rate, term, loan, pi, tax, ins, pmi, hoa, total };
+}
+function render() {
+  const c = calc(), rent = D.rent.headline;
+  $('bd').innerHTML = [
+    ['Loan amount', usd(c.loan)], ['Principal & interest', usd(c.pi)], ['Property tax', usd(c.tax)],
+    ['Homeowners insurance', usd(c.ins)], ...(c.pmi ? [['PMI', usd(c.pmi)]] : []), ...(c.hoa ? [['HOA', usd(c.hoa)]] : [])
+  ].map(([k, v]) => `<tr><td>${k}</td><td class="num">${v}</td></tr>`).join('') + `<tr class="total"><td>Total monthly</td><td class="num">${usd(c.total)}</td></tr>`;
+  const max = Math.max(c.total, rent);
+  $('cmp').innerHTML = `<span>Own</span><div class="b" style="width:${c.total / max * 100}%"></div><span class="num">${usd(c.total)}</span>
+                        <span>Rent</span><div class="b rent" style="width:${rent / max * 100}%"></div><span class="num">${usd(rent)}</span>`;
+}
+fetch('data.json', { cache: 'no-store' }).then(r => r.json()).then(d => {
+  D = d; const a = d.assumptions;
+  $('stamp').textContent = 'Updated ' + new Date(d.updated).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+  $('price').value = d.price.headline; $('down').value = a.default_down_pct; $('rate').value = a.rate_pct; $('term').value = a.term_years;
+  const base = calc();
+  $('kRent').textContent = usd(d.rent.headline); $('kRentSub').textContent = d.rent.method;
+  $('kPrice').textContent = usd(d.price.headline); $('kPriceSub').textContent = 'Median sold price, last 12 months';
+  $('kPI').textContent = usd(base.pi); $('kPISub').textContent = `${a.default_down_pct}% down, ${a.term_years}-yr fixed on ${usd(base.loan)}`;
+  $('kPITI').textContent = usd(base.total);
+  const diff = base.total - d.rent.headline;
+  $('verdict').innerHTML = diff > 0
+    ? `With 20% down, owning costs about <b>${usd(diff)} more per month</b> than renting a 3-bed, before maintenance (but you build equity). P&amp;I alone is ${usd(Math.abs(base.pi - d.rent.headline))} ${base.pi > d.rent.headline ? 'more' : 'less'} than rent.`
+    : `With 20% down, owning costs about <b>${usd(-diff)} less per month</b> than renting a 3-bed, before maintenance.`;
+  const obs = (list, el) => $(el).innerHTML = list.map(o => `<tr><td><a href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.source)}</a></td><td class="small">${esc(o.as_of)}</td><td class="num">${usd(o.value)}</td></tr>`).join('');
+  obs(d.rent.observations, 'rentObs'); obs(d.price.observations, 'priceObs');
+  $('rentTrend').textContent = d.rent.trend_note; $('priceTrend').textContent = d.price.basis + ' ' + d.price.trend_note;
+  $('assume').innerHTML = a.notes.map(n => `<li>${esc(n.text)}${n.url ? ` <a href="${esc(n.url)}" target="_blank" rel="noopener">source</a>` : ''}</li>`).join('');
+  render();
+  ['price', 'down', 'rate', 'term'].forEach(id => $(id).addEventListener('input', render));
+}).catch(() => { $('verdict').textContent = 'Could not load data.json.'; });
+</script>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

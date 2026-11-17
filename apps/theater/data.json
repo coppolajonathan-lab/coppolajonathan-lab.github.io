@@ -1,0 +1,108 @@
+{
+  "updated": "2026-11-17T14:30:00-05:00",
+  "region": "Community theaters within roughly one hour's drive of Tampa, FL",
+  "baritenor_definition": "A baritenor role sits between baritone and tenor: a working range of roughly G2/A2 up to A4–B♭4, with the tessitura living around C3–F4 and the big notes around G4–A4. 'Strong' means the role is a textbook baritenor sing. 'Possible' means it's written for a high baritone or low tenor and a baritenor could likely cover it.",
+  "auditions": [
+    {
+      "musical": "Damn Yankees",
+      "theater_group": "Eight O'Clock Theatre",
+      "city": "Largo",
+      "audition_dates": ["2026-12-06", "2026-12-07"],
+      "audition_text": "Sun Dec 6, 2:00 PM (Historic Largo Feed Store, 295 Central Park Dr) · Mon Dec 7, 7:00 PM (Central Park Performing Arts Center, 105 Central Park Dr)",
+      "show_dates_text": "Feb 26 – Mar 7, 2027",
+      "show_start": "2027-02-26",
+      "show_end": "2027-03-07",
+      "url": "https://eightoclocktheatre.com/auditions/",
+      "roles": [
+        { "role": "Joe Hardy", "fit": "strong", "listed_range": "A3–G5 (as listed by theater; likely written in treble clef)", "notes": "Leading, 20–30. Classic high-baritone/tenor juvenile lead (\"Goodbye, Old Girl\" reprise, \"A Man Doesn't Know\")." },
+        { "role": "Joe Boyd", "fit": "strong", "listed_range": "A3–G5 (as listed)", "notes": "Supporting, 40–50. Older Joe; sits comfortably for a baritenor." },
+        { "role": "Mr. Applegate", "fit": "possible", "listed_range": "A3–G5 (as listed)", "notes": "Leading, 40–50. Character baritone (\"Those Were the Good Old Days\"); more acting than vocal fireworks." },
+        { "role": "Van Buren", "fit": "possible", "listed_range": "D4–A5 (as listed)", "notes": "Featured, 50–60. Leads \"Heart\" — baritone line." },
+        { "role": "Smokey", "fit": "possible", "listed_range": "C3–G5 (as listed)", "notes": "Featured, 25–35. \"Heart\" quartet; harmony part." }
+      ]
+    },
+    {
+      "musical": "Big Fish",
+      "theater_group": "Eight O'Clock Theatre",
+      "city": "Largo",
+      "audition_dates": ["2027-02-07", "2027-02-08"],
+      "audition_text": "Sun Feb 7 & Mon Feb 8, 7:00 PM (marked \"New Dates\" on the theater's page; an earlier listing said Feb 21–22)",
+      "show_dates_text": "TBA (2026–27 season)",
+      "show_start": null,
+      "show_end": null,
+      "url": "https://eightoclocktheatre.com/auditions/",
+      "roles": [
+        { "role": "Edward Bloom", "fit": "strong", "listed_range": "Baritone, G2–A4", "notes": "Leading, 35–50. The baritenor dream role — huge, storyteller lead (\"Be the Hero\", \"Fight the Dragons\")." },
+        { "role": "Will Bloom", "fit": "strong", "listed_range": "Listed as D4–C#3 (range appears inverted on the page)", "notes": "Leading, 20–30. High baritone/tenor; \"Stranger\" and \"What's Next\" sit right in baritenor territory." },
+        { "role": "Zachy Price", "fit": "possible", "listed_range": "A3–G#4", "notes": "Featured, 20–40. Small sung role." },
+        { "role": "Don Price", "fit": "possible", "listed_range": "Listed as \"Soprano, C3–F#4\" (typo on page)", "notes": "Featured, 30–45. Bully/rival; baritone line." }
+      ]
+    },
+    {
+      "musical": "Hands on a Hardbody",
+      "theater_group": "Theatre Winter Haven",
+      "city": "Winter Haven",
+      "audition_dates": ["2026-11-09", "2026-11-10"],
+      "audition_text": "Nov 9 & 10, 2026",
+      "show_dates_text": "Feb 11 – 21, 2027 (Norman and Linda Small Second Stage)",
+      "show_start": "2027-02-11",
+      "show_end": "2027-02-21",
+      "url": "https://theatrewinterhaven.com/auditions/",
+      "roles": [
+        { "role": "Chris Alvaro", "fit": "strong", "listed_range": "No breakdown posted; from the show's standard casting", "notes": "Iraq-war vet; \"Stronger\" is a baritenor showcase." },
+        { "role": "Greg Wilhote", "fit": "possible", "listed_range": "No breakdown posted; from the show's standard casting", "notes": "Young romantic contestant; tenor-leaning." }
+      ]
+    },
+    {
+      "musical": "Carrie: The Musical",
+      "theater_group": "MAD Theatre of Tampa",
+      "city": "Tampa",
+      "audition_dates": ["2026-11-04", "2026-11-05"],
+      "audition_text": "Nov 4 (vocal & movement) · Nov 5 callbacks — Wellswood Civic Center",
+      "show_dates_text": "Jan 14 – 31, 2027",
+      "show_start": "2027-01-14",
+      "show_end": "2027-01-31",
+      "url": "https://madtheatre.com/auditions/",
+      "roles": [
+        { "role": "Tommy Ross", "fit": "possible", "listed_range": "A2–C5", "notes": "Male lead; top is tenor-high but most of the sing is baritenor-friendly." },
+        { "role": "Mr. Stephens", "fit": "possible", "listed_range": "A2–G4", "notes": "Teacher; may double with Reverend Bliss." }
+      ]
+    },
+    {
+      "musical": "Fiddler on the Roof",
+      "theater_group": "MAD Theatre of Tampa",
+      "city": "Tampa",
+      "audition_dates": ["2026-11-04", "2026-11-05"],
+      "audition_text": "Nov 4 (vocal & movement) · Nov 5 callbacks — joint audition with Carrie",
+      "show_dates_text": "Jun 11 – 27, 2027",
+      "show_start": "2027-06-11",
+      "show_end": "2027-06-27",
+      "url": "https://madtheatre.com/auditions/",
+      "roles": [
+        { "role": "Perchik", "fit": "possible", "listed_range": "Tenor (20–30)", "notes": "\"Now I Have Everything\" sits well for a baritenor." },
+        { "role": "Motel Kamzoil", "fit": "possible", "listed_range": "Tenor (18–25)", "notes": "\"Miracle of Miracles\" — light tenor, doable for a high baritenor." }
+      ]
+    }
+  ],
+  "watchlist": [
+    { "musical": "Finding Neverland", "theater_group": "Lakeland Community Theatre", "city": "Lakeland", "show_dates_text": "Feb 19 – 28, 2027", "roles": "J.M. Barrie (baritenor lead)", "url": "https://www.lakelandcommunitytheatre.com/", "note": "Audition notice not posted yet — likely late Nov / Dec." },
+    { "musical": "A Gentleman's Guide to Love and Murder", "theater_group": "Lakeland Community Theatre", "city": "Lakeland", "show_dates_text": "Jul 16 – 25, 2027", "roles": "Monty Navarro (tenor/baritenor), D'Ysquith family (baritone character)", "url": "https://www.lakelandcommunitytheatre.com/", "note": "Auditions typically ~3 months before opening." },
+    { "musical": "Guys and Dolls", "theater_group": "Manatee Performing Arts Center (Manatee Players)", "city": "Bradenton", "show_dates_text": "Apr 22 – May 2, 2027", "roles": "Sky Masterson (baritone/baritenor), Nicely-Nicely Johnson (tenor)", "url": "https://www.manateeperformingartscenter.com/", "note": "MPAC often runs joint auditions for several shows months ahead — watch for a winter call." },
+    { "musical": "Big Fish (dates)", "theater_group": "Eight O'Clock Theatre", "city": "Largo", "show_dates_text": "TBA", "roles": "Edward Bloom, Will Bloom", "url": "https://eightoclocktheatre.com/", "note": "Performance dates not yet published." }
+  ],
+  "groups_checked": [
+    { "name": "Eight O'Clock Theatre", "city": "Largo", "url": "https://eightoclocktheatre.com/auditions/" },
+    { "name": "Carrollwood Players Theatre", "city": "Tampa", "url": "https://carrollwoodplayers.org/auditions-2/" },
+    { "name": "Carrollwood Cultural Center", "city": "Tampa", "url": "https://carrollwoodcenter.org/" },
+    { "name": "MAD Theatre of Tampa", "city": "Tampa", "url": "https://madtheatre.com/auditions/" },
+    { "name": "St. Petersburg City Theatre", "city": "St. Petersburg", "url": "https://spcitytheatre.org/" },
+    { "name": "Francis Wilson Playhouse", "city": "Clearwater", "url": "https://franciswilsonplayhouse.org/" },
+    { "name": "Richey Suncoast Theatre", "city": "New Port Richey", "url": "https://www.broadwayworld.com/tampa/regionalshows/RICHEY-SUNCOAST-THEATRE" },
+    { "name": "Stage West Playhouse", "city": "Spring Hill", "url": "https://stagewestflorida.com/auditions/" },
+    { "name": "Lakeland Community Theatre", "city": "Lakeland", "url": "https://www.lakelandcommunitytheatre.com/" },
+    { "name": "Theatre Winter Haven", "city": "Winter Haven", "url": "https://theatrewinterhaven.com/auditions/" },
+    { "name": "Manatee Performing Arts Center", "city": "Bradenton", "url": "https://www.manateeperformingartscenter.com/" },
+    { "name": "The Sarasota Players", "city": "Sarasota", "url": "https://theplayers.org/" }
+  ],
+  "notes": "Carrollwood Players' upcoming calls (The Carol Burnett Show, Private Lives, The Comedy of Errors, Four Old Broads) are not musicals and are excluded. Stage West, Richey Suncoast, St. Pete City Theatre and Francis Wilson had no open musical auditions found on Nov 17, 2026."
+}

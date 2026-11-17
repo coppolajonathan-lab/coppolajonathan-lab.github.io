@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem('site-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Baritenor Casting Call · Tampa Bay</title>
 <link rel="stylesheet" href="../../assets/apps.css">
 <style>
   :root { --accent: #a3405e; --accent-ink: #ffffff; }
+  html[data-theme="leather"] { --accent: #e08aa4; --accent-ink: #1a120c; }
   .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 4px 0 18px; }
   .controls label { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
   .show { margin-bottom: 16px; }

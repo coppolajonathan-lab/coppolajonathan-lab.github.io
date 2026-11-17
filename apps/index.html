@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem('site-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Apps · Jonathan Coppola</title>
 <link rel="stylesheet" href="../assets/apps.css">
@@ -13,6 +14,7 @@
          background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; min-height: 230px;
          transition: transform .15s ease, border-color .15s ease; overflow: hidden; }
   .app::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--c); }
+  html[data-theme="leather"] .app::before { filter: brightness(1.5); }
   .app:hover { transform: translateY(-3px); border-color: var(--c); }
   .app .glyph { font-size: 30px; line-height: 1; }
   .app h3 { font-family: var(--display); font-weight: 800; font-size: 23px; margin: 4px 0 0; }

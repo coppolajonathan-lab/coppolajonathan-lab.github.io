@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem('site-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Campaign Forge</title>
 <link rel="stylesheet" href="../../assets/apps.css">
 <style>
   :root { --accent: #5b4bb5; --accent-ink: #ffffff; }
+  html[data-theme="leather"] { --accent: #a89bf0; --accent-ink: #1a120c; }
   body { min-height: 100vh; }
   .wrap { display: flex; flex-direction: column; min-height: 100vh; padding-bottom: 20px; }
   .modebar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 6px 0 14px; }

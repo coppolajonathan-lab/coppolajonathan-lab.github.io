@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem('site-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jonathan Coppola, MS</title>
 <meta name="description" content="Jonathan Coppola: technical curriculum developer and program manager at Darktrace, baritenor in Tampa Bay community theater, and tabletop game master.">
@@ -25,7 +26,7 @@
   h1 { font-family: var(--serif); font-weight: 800; font-size: clamp(44px, 8vw, 84px); line-height: 1; margin: 14px 0 8px; letter-spacing: -0.02em; }
   h1 small { font-size: .38em; font-weight: 400; color: var(--muted); letter-spacing: 0; }
   .headline { font-family: var(--serif); font-style: italic; font-size: clamp(17px, 2.4vw, 21px); color: var(--wine); margin: 6px 0 22px; }
-  .intro { max-width: 680px; margin: 0 auto 28px; color: #3a342e; font-size: 17px; }
+  .intro { max-width: 680px; margin: 0 auto 28px; color: var(--body-text, #3a342e); font-size: 17px; }
   .links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
   .btn { display: inline-block; padding: 10px 18px; border-radius: 999px; border: 1px solid var(--ink); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 14px; }
   .btn.solid { background: var(--wine); border-color: var(--wine); color: #fff; }
@@ -44,7 +45,7 @@
   .act .num { font-family: var(--serif); font-style: italic; color: var(--gold); font-size: 18px; white-space: nowrap; }
   .act h2 { font-family: var(--serif); font-weight: 800; font-size: clamp(30px, 4.5vw, 42px); margin: 0; line-height: 1.1; }
   .act .rule { flex: 1; height: 1px; background: var(--line); }
-  .lede { font-size: 17px; color: #3a342e; max-width: 760px; }
+  .lede { font-size: 17px; color: var(--body-text, #3a342e); max-width: 760px; }
 
   .job { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid var(--line); }
   .job .co { font-family: var(--serif); font-weight: 600; font-size: 20px; line-height: 1.2; }
@@ -66,7 +67,7 @@
   .edu > div + div, .pub > div + div { margin-top: 14px; }
 
   /* Stage: playbill styling */
-  .playbill { background: var(--ink); color: #f3ead7; border-radius: 16px; padding: 34px; position: relative; overflow: hidden; }
+  .playbill { background: var(--stage, var(--ink)); color: #f3ead7; border-radius: 16px; padding: 34px; position: relative; overflow: hidden; }
   .playbill::before { content: ""; position: absolute; inset: 10px; border: 1px solid color-mix(in srgb, var(--gold) 60%, transparent); border-radius: 10px; pointer-events: none; }
   .playbill .voice { font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
   .playbill h3 { font-family: var(--serif); font-size: 28px; margin: 6px 0 14px; }

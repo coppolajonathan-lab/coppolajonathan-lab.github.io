@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem('site-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Brandon 3/2 Watch</title>
 <link rel="stylesheet" href="../../assets/apps.css">
 <style>
   :root { --accent: #9a6b1f; --accent-ink: #ffffff; }
+  html[data-theme="leather"] { --accent: #e0b062; --accent-ink: #1a120c; }
   .kpis { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
   .kpi .label { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
   .kpi .val { font-family: var(--display); font-weight: 800; font-size: 40px; line-height: 1.1; margin: 6px 0 4px; }

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem('site-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What I'm Up To · Jonathan Coppola</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +22,7 @@
   header { padding: 60px 0 30px; }
   .kicker { font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
   h1 { font-family: var(--serif); font-weight: 800; font-size: clamp(40px, 7vw, 72px); line-height: 1; margin: 12px 0 10px; letter-spacing: -0.02em; }
-  .intro { font-size: 18px; color: #3a342e; max-width: 640px; margin: 0; }
+  .intro { font-size: 18px; color: var(--body-text, #3a342e); max-width: 640px; margin: 0; }
   .updated { font-size: 13px; color: var(--muted); margin-top: 10px; }
 
   section { padding: 44px 0 10px; scroll-margin-top: 60px; }
@@ -33,7 +34,7 @@
   .sec-head .count { font-size: 13px; color: var(--muted); }
 
   .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
-  .card { background: #fffaf0; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
+  .card { background: var(--card, #fffaf0); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
   .card .body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
   .card h3 { font-family: var(--serif); font-size: 22px; margin: 0; line-height: 1.2; }
   .meta { font-size: 13px; color: var(--muted); }
@@ -43,11 +44,11 @@
   .card p { margin: 4px 0 0; }
   .card .more { margin-top: auto; padding-top: 10px; font-size: 14px; font-weight: 600; }
 
-  .cover { aspect-ratio: 4 / 3; background: var(--ink); position: relative; overflow: hidden; }
+  .cover { aspect-ratio: 4 / 3; background: var(--stage, var(--ink)); position: relative; overflow: hidden; }
   .cover img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
   .card:hover .cover img { transform: scale(1.03); }
   .cover.placeholder { display: grid; place-items: center; background:
-      radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--gold) 35%, transparent), transparent 55%), var(--ink); }
+      radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--gold) 35%, transparent), transparent 55%), var(--stage, var(--ink)); }
   .cover.placeholder span { font-family: var(--serif); font-style: italic; color: #f3ead7; font-size: 28px; text-align: center; padding: 0 20px; line-height: 1.15; }
   .cover.placeholder small { display: block; font-family: var(--sans); font-style: normal; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-top: 10px; }
 
@@ -64,7 +65,7 @@
   .work-item .when { font-size: 13px; color: var(--muted); }
   .work-item h3 { margin: 0; font-size: 18px; }
   .work-item .org { color: var(--wine); font-weight: 600; font-size: 14px; }
-  .work-item p { margin: 6px 0 0; color: #3a342e; }
+  .work-item p { margin: 6px 0 0; color: var(--body-text, #3a342e); }
 
   dialog.lightbox { padding: 0; border: 0; background: transparent; max-width: 96vw; max-height: 94vh; }
   dialog.lightbox::backdrop { background: rgba(15, 12, 10, .92); }

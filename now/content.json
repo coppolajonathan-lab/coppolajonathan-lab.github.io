@@ -35,7 +35,18 @@
       "link": "https://jonathans-apothecary-of-scents.scentsy.us"
     }
   ],
-  "upcoming_shows": [],
+  "upcoming_shows": [
+     {
+      "slug": "fiddler-on-the-roof-2027",
+      "show": "Fiddler on the Roof",
+      "role": "Mendel / Ensemble",
+      "company": "mAD Theater Tampa",
+      "director": "Nathan",
+      "year": "2026",
+      "blurb": "My debut with mAD Theater: Son of the Rabbi, trying to understand lifes changes and why things promised to us may not always come at the right time.",
+      "cover": null
+     }
+  ],
   "upcoming_empty_note": "Between shows and auditioning around Tampa Bay. Next role coming soon.",
   "past_shows": [
     {

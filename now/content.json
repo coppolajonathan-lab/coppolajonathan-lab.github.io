@@ -47,13 +47,35 @@
       "year": "2026",
       "blurb": "My debut with New Tampa Players: a Newfoundland accent, a constable's swagger, and one of the best ensembles I've been part of.",
       "cover": "images/shows/come-from-away-2026/106044131-COME FROM AWAY CAST WITH TITLES.jpeg",
-      "photos": ["src": "images/shows/come-from-away-2026/106044132-COME FROM AWAY (386).jpeg", "caption": "Oz giving directions",
-      "src": "images/shows/come-from-away-2026/106044133-COME FROM AWAY (761).jpeg", "caption": "The men of Come From Away",
-      "src": "images/shows/come-from-away-2026/106044134-COME FROM AWAY (502).jpeg", "caption": "Oz and the ugly stick",
-      "src": "images/shows/come-from-away-2026/106044135-COME FROM AWAY (269).jpeg", "caption": "Mr. Michales",
-      "src": "images/shows/come-from-away-2026/IMG_4978.JPG", "caption": "Having fun at the legion",
-      "src": "images/shows/come-from-away-2026/IMG_5016.JPG", "caption": "Head Cadiologist",
-      "src": "images/shows/come-from-away-2026/IMG_5017.JPG", "caption": "Terri comforting come from aways"
+      "photos": [
+        {
+          "src": "images/shows/come-from-away-2026/106044132-COME FROM AWAY (386).jpeg",
+          "caption": "Oz giving directions"
+        },
+        {
+          "src": "images/shows/come-from-away-2026/106044133-COME FROM AWAY (761).jpeg",
+          "caption": "The men of Come From Away"
+        },
+        {
+          "src": "images/shows/come-from-away-2026/106044134-COME FROM AWAY (502).jpeg",
+          "caption": "Oz and the ugly stick"
+        },
+        {
+          "src": "images/shows/come-from-away-2026/106044135-COME FROM AWAY (269).jpeg",
+          "caption": "Mr. Michales"
+        },
+        {
+          "src": "images/shows/come-from-away-2026/IMG_4978.JPG",
+          "caption": "Having fun at the legion"
+        },
+        {
+          "src": "images/shows/come-from-away-2026/IMG_5016.JPG",
+          "caption": "Head Cadiologist"
+        },
+        {
+          "src": "images/shows/come-from-away-2026/IMG_5017.JPG",
+          "caption": "Terri comforting come from aways"
+        }
       ]
     }
   ],
